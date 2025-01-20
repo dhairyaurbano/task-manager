@@ -12,7 +12,8 @@
 	import TemplatesIcon from '../Icons/TemplatesIcon.svelte';
 	import CompaniesIcon from '../Icons/CompaniesIcon.svelte';
 	import CompanyLogo from '../Icons/companyLogo.svelte';
-	import SearchBar from './searchBar.svelte';
+	import Searchbar from '../SearchBar/SearchBar.svelte';
+	// import SearchBar from './searchBar.svelte';
     const menuItems = [
     
       { href: '/dashboard', icon: DashboardIcon, label: 'Dashboard'},
@@ -25,7 +26,8 @@
     ];
   </script>
   <div>
-    <nav class="lg:w-64 w-48 bg-[#FBFBFB] text-black h-full fixed  pr-3 flex flex-col justify-between">
+    
+    <nav class="lg:w-64 w-48 bg-[#FBFBFB] text-black h-full  pr-3 flex flex-col justify-between">
        
       <div class="flex flex-col items-center space pt-3">
         <div class="flex items-center space gap-x-3 pt-3">
@@ -36,7 +38,8 @@
             <span class="text-sky-400 mr-1">Management</span>
           </p>
         </div>
-        <SearchBar/> 
+        <Searchbar/>
+        
 
       <ul class="space-y-1 mt-2">
         {#each menuItems as item}
@@ -53,7 +56,7 @@
           <a 
             href="/logout" 
             class="flex items-center lg:w-64 w-48 bg-[#fbfbfb] w-auto p-2  hover:text-sky-400">
-            <img src="/logout.png" alt="Logout Icon" class="w-6 h-6 ml-4" />
+            <img src="/logout.png" alt="Logout Icon" class="w-5 h-5 ml-4" />
             <p class="text-sm font-medium ml-2">Logout</p>
           </a>
         </div>

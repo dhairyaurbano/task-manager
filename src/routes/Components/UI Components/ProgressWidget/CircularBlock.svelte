@@ -1,6 +1,6 @@
 <script>
     export let text = "Default Text";
-    export let linking=false;
+    // export let linking=false;
     export let selectedStat=false;
 </script>
   
@@ -17,10 +17,7 @@
   </div>
   {/if}
 
-  
-  <!-- this is the vertical line  -->
-  {#if linking}
-  <div class="w-0.5 h-16 bg-[#00000017]"></div>
-  {/if}
+
+
 </div>
   
