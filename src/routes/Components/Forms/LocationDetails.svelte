@@ -1,19 +1,63 @@
 <script>
+	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
 	import TextAreaView from "./FormComponents/TextAreaView.svelte";
 	import TextView from "./FormComponents/TextView.svelte";
+  import {activeTab, CompanyDetails,steps} from '../../../lib/SystemTab/formdatahandling.js'
 
+  function savedetials(){
+    console.log("Company name: "+ $CompanyDetails.companyName);
+    console.log("Company website: "+ $CompanyDetails.companyWebsite);
+    console.log("GST Number: "+ $CompanyDetails.gstNumber);
+    console.log("Company Description: "+ $CompanyDetails.companydescription);
+
+    console.log("Company location: "+ $CompanyDetails.companylocation);
+    console.log("Company zip code: "+ $CompanyDetails.zipcode);
+    console.log("Bill to: "+ $CompanyDetails.billto);
+    console.log("Location Description: "+ $CompanyDetails.locationdesc);
+
+    console.log("data saved sucessfully");
+  }
+  function addlocationHandler(){
+    console.log("Add location button clicked");
+  }
+
+
+
+  const options = [
+        { value: "bandlore", label: "Banglore" },
+        { value: "kolkatta", label: "Kolkatta" },
+        { value: "chennai", label: "Chennai" }
+    ];
 </script>
 <div class="p-6 min-w-96 bg-[#00000015] rounded-lg shadow-md">
-    <h2 class="text-2xl font-semibold text-gray-700 text-start mb-6">Location</h2>
-    <form action="#" method="POST">
-      <TextView
-      id="companyLocation" 
-      label="Company Location" 
-      name="companyLocation" 
-      placeholder="Location 1" 
-      inputtype="text" 
-      required={true} 
+  <div class="flex flex-row items-center justify-between mb-3 ">
+    <div><p class="text-2xl font-semibold text-gray-700">Location</p></div>
+    <ButtonComponent 
+      bgcolor="bg-black" 
+      leadingimg="/location_on_icon.png" 
+      label="Add Location" 
+      textcolor="text-white" 
+      rounded="rounded-lg" 
+      onClick={addlocationHandler} 
+      type="button" 
+      focusringcolor="focus-gray-100"
     />
+  </div>
+  
+    <form action="" method="POST">
+
+    <div class="">
+      <label for="dropdown" class="block text-sm font-medium text-gray-600 ">
+          Status Location
+          <span class="text-red-500">*</span>
+      </label>
+      <select id="dropdown" bind:value={$CompanyDetails.companylocation} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+          <option value="" disabled selected>Select Location</option>
+          {#each options as option}
+              <option value={option.value}>{option.label}</option>
+          {/each}
+      </select>
+  </div>
     
     <TextView 
       id="zipCode" 
@@ -22,41 +66,44 @@
       placeholder="123456" 
       inputtype="number" 
       required={true} 
+      bind:value={$CompanyDetails.zipcode}
     />
     
     <TextView 
-      id="gstNumber" 
+      id="billto" 
       label="Bill to" 
       name="billTo" 
       placeholder="abcdef" 
       inputtype="text" 
       required={true} 
+      bind:value={$CompanyDetails.billto} 
     />
-
-
-
-      <!-- Description -->
-      <!-- <div class="mb-3">
-          <label for="description" class="block text-sm font-medium text-gray-600 mb-1">Description</label>
-          <textarea id="description" name="description" rows="1" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter description (optional)"></textarea>
-        </div> -->
 
         <TextAreaView 
   id="description" 
   label="Description" 
   name="description" 
   placeholder="Enter description (optional)" 
+  bind:value={$CompanyDetails.locationdesc} 
 />
         
 
       <!-- Save Button -->
-      <div class="text-center">
-          <button type="submit" class="bg-white text-sky-500 border-2 border-sky-500 py-2 px-4 rounded-full flex items-center justify-center gap-2 hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
-            <img src="/Save.png" alt="Save Icon" class="w-5 h-5" />
-            <span>Save Details</span>
-          </button>
-        </div>
-        <!-- <CircularBlock text="Hello!" /> -->
+      <ButtonComponent
+    label="Save Details"
+    bgcolor="bg-white"
+    textcolor="text-sky-500"
+    bordercolor="border-sky-500"
+    focusringcolor="focus:ring-sky-400"
+    hoverbg="hover:bg-sky-50"
+    rounded="rounded-full"
+    leadingimg="/Save.png"
+    leadingalt="Save Icon"
+    laggingimg=""
+    laggingalt=""
+    type="submit"
+    onClick={savedetials}
+    />
         
     </form>
 </div>

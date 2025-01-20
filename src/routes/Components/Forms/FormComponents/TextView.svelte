@@ -5,6 +5,7 @@
     export let id="id";
     export let name="name";
     export let placeholder="Enter your text";
+    export let value="";
 
 
 </script>
@@ -16,5 +17,6 @@
         <span class="text-red-500">*</span>
         {/if}
     </label>
-    <input type={inputtype} id={id} name={name} {required} class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder={placeholder}>
+    <input type={inputtype} id={id} name={name} {required} class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder={placeholder}
+    bind:value={value}>
   </div>

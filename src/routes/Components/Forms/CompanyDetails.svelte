@@ -1,11 +1,28 @@
 <script>
   import TextAreaView from "./FormComponents/TextAreaView.svelte";
   import TextView from "./FormComponents/TextView.svelte";
+  import {activeTab, CompanyDetails,steps} from '../../../lib/SystemTab/formdatahandling.js'
+	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
+
+  function updateSteps(index) {
+    steps.update((allSteps) =>
+      allSteps.map((step, i) => ({
+        ...step,
+        selected: i <= index, // Set selected to true only for the clicked step
+      }))
+    );
+  }
+
+  function savedetials() {
+    console.log("We have completed the company details tab , Now location detail tab");
+    $activeTab = 1;
+    updateSteps(1);
+  }
 </script>
 
 <div class="p-6 w-96 bg-[#00000015] rounded-lg shadow-md">
     <h2 class="text-2xl font-semibold text-gray-700 text-start mb-6">Company Details</h2>
-    <form action="#" method="POST">
+    <form action="" method="POST">
       <!-- Company Name -->
       <TextView 
         id="companyName" 
@@ -13,7 +30,8 @@
         name="companyName" 
         placeholder="Enter company name" 
         inputtype="text" 
-        required={true} 
+        required={true}
+        bind:value={$CompanyDetails.companyName} 
       />
 
       <!-- Company Website -->
@@ -24,6 +42,7 @@
         placeholder="Enter company website" 
         inputtype="url" 
         required={true} 
+        bind:value={$CompanyDetails.companyWebsite} 
       />
 
       <!-- GST Number -->
@@ -34,6 +53,7 @@
         placeholder="Enter GST number" 
         inputtype="number" 
         required={true} 
+        bind:value={$CompanyDetails.gstNumber} 
       />
 
       <!-- Description -->
@@ -42,15 +62,25 @@
         label="Description" 
         name="description" 
         placeholder="Enter description (optional)" 
+        bind:value={$CompanyDetails.companydescription}
       />
 
       <!-- Save Button -->
-      <div class="text-center">
-        <button type="submit" class="bg-white text-sky-500 border-2 border-sky-500 py-2 px-4 rounded-full flex items-center justify-center gap-2 hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
-          <img src="/Save.png" alt="Save Icon" class="w-5 h-5" />
-          <span>Save Details</span>
-        </button>
-      </div>
+      <ButtonComponent
+    label="Save Details"
+    bgcolor="bg-white"
+    textcolor="text-sky-500"
+    bordercolor="border-sky-500"
+    focusringcolor="focus:ring-sky-400"
+    hoverbg="hover:bg-sky-50"
+    rounded="rounded-full"
+    leadingimg="/Save.png"
+    leadingalt="Save Icon"
+    laggingimg=""
+    laggingalt=""
+    type="button"
+    onClick={savedetials}
+/>
     </form>
 </div>
 

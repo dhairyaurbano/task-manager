@@ -13,7 +13,8 @@
 	import CompaniesIcon from '../Icons/CompaniesIcon.svelte';
 	import CompanyLogo from '../Icons/companyLogo.svelte';
 	import Searchbar from '../SearchBar/SearchBar.svelte';
-	// import SearchBar from './searchBar.svelte';
+	import { activemenu } from "$lib/SystemTab/selectednavigationmenuitem";
+  let customlableclass="";
     const menuItems = [
     
       { href: '/dashboard', icon: DashboardIcon, label: 'Dashboard'},
@@ -42,9 +43,9 @@
         
 
       <ul class="space-y-1 mt-2">
-        {#each menuItems as item}
+        {#each menuItems as item,index}
           <li>
-            <SideNavigationMenuItem href={item.href} icon={item.icon} label={item.label} labelclass={item.labelclass} />
+            <SideNavigationMenuItem href={item.href} icon={item.icon} label={item.label} labelclass={index === $activemenu ? 'text-sky-500' : ''}/>
           </li>
         {/each}
         

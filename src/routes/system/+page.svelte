@@ -1,1 +1,11 @@
-<h1>This is the system section</h1>
+
+
+
+<script>
+	import PageFrames from "../Components/UI Components/pageFrames.svelte";
+    import { activemenu } from "$lib/SystemTab/selectednavigationmenuitem";
+      
+      $activemenu=4;
+</script>
+
+<PageFrames/>

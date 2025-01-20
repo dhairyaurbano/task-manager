@@ -1,12 +1,7 @@
 <script>
-import ContentWindow from "D:/Company Work/Svelte Project/Company Website/task-manager/src/routes/Components/UI Components/ContentWindow.svelte";
+	import PageFrames from "../Components/UI Components/pageFrames.svelte";
+  import { activemenu } from "$lib/SystemTab/selectednavigationmenuitem";
+$activemenu=2;
 
 </script>
-<!-- <ContentWindow/> -->
- <!-- <Appbar/> -->
-  
-  <!-- <h1>Heeel</h1> -->
-
-<!-- <AppBar/> -->
-
-<h1>This is companies</h1>
+<PageFrames/>
