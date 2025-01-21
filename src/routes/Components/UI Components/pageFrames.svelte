@@ -2,7 +2,7 @@
 	import Appbar from "./AppBar/AppBar.svelte";
 	import CompaniesContentWindow from "./ContenetWindow/CompaniesContentWindow.svelte";
 import SideNavigationbar from "./SideNavigationBar/SideNavigationbar.svelte";
-import { activemenu } from "$lib/SystemTab/selectednavigationmenuitem";
+import { activemenu } from "$lib/CompanyTab/selectednavigationmenuitem";
 	import UserandGroupIcon from "./Icons/UserandGroupIcon.svelte";
 	import DashbaordContentWindow from "./ContenetWindow/DashbaordContentWindow.svelte";
 	import UsersContentWindow from "./ContenetWindow/UsersContentWindow.svelte";

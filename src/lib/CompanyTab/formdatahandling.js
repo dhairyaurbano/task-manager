@@ -1,19 +1,17 @@
 import { writable } from 'svelte/store';
 
 // Create a writable store with an initial value
-export const CompanyDetailsSystemTab = writable({
+export const CompanyDetails = writable({
   companyName: '',
   companyWebsite: '',
-  PONumber: '',
+  gstNumber: '',
   companydescription: '',
   companylocation:'',
-  systemname:'',
-  systemid:'',
+  zipcode:'',
+  billto:'',
+  locationdesc:'',
 });
 export let activeTab = writable(0);
-export let activeSystemTab = writable(0);
-export let systemSubTabs = writable(['System 1']);
-
 
 
 export let steps = writable([
@@ -26,8 +24,8 @@ export let steps = writable([
     },
     {
       stepText: "2",
-      companyText: "System",
-      descriptionText: "Add multiple System and Tasks",
+      companyText: "Location Details",
+      descriptionText: "Add company location details",
       link: false,
       selected: false,
     },

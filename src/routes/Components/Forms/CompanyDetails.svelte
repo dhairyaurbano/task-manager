@@ -1,7 +1,7 @@
 <script>
   import TextAreaView from "./FormComponents/TextAreaView.svelte";
   import TextView from "./FormComponents/TextView.svelte";
-  import {activeTab, CompanyDetails,steps} from '../../../lib/SystemTab/formdatahandling.js'
+  import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
 	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
 
   function updateSteps(index) {
@@ -20,7 +20,7 @@
   }
 </script>
 
-<div class="p-6 w-96 bg-[#00000015] rounded-lg shadow-md">
+<div class="p-6 w-full bg-[#00000015] rounded-lg shadow-md">
     <h2 class="text-2xl font-semibold text-gray-700 text-start mb-6">Company Details</h2>
     <form action="" method="POST">
       <!-- Company Name -->

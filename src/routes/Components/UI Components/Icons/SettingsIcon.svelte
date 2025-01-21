@@ -2,7 +2,7 @@
     export let size = 6; // Set the default
     //  size
 
-    import { activemenu } from "$lib/SystemTab/selectednavigationmenuitem";
+    import { activemenu } from "$lib/CompanyTab/selectednavigationmenuitem";
     let colortint="";
     $: colortint = $activemenu === 6 ? "text-sky-500" : "";
 </script>

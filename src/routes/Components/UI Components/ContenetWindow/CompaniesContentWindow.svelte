@@ -5,7 +5,7 @@
   import AppBar from "../AppBar/AppBar.svelte";
   import CircularBlock from '../ProgressWidget/CircularBlock.svelte';
   import LocationDetails from "../../Forms/LocationDetails.svelte";
-  import { activeTab, steps } from '../../../../lib/SystemTab/formdatahandling.js';
+  import { activeTab, steps } from '../../../../lib/CompanyTab/formdatahandling.js';
 
   // Tabs Data
   let tabs = [
@@ -14,6 +14,7 @@
   ];
 
   $activeTab = 0;
+  updateSteps(0);
 
   function updateSteps(index) {
     steps.update((allSteps) =>
@@ -25,9 +26,9 @@
   }
 </script>
 
-<div class="w-full p-4 border-2 rounded-3xl border-[#D7D6D6] bg-white">
-  <div class="flex flex-row p-5">
-    <div class="p-4 max-w-96 bg-white rounded-lg">
+<div class="w-full p-1 border-2 rounded-3xl border-[#D7D6D6] ">
+  <div class="flex flex-row p-3">
+    <div class="p-4 max-w-96  rounded-lg">
       {#each $steps as step}
         <Step
           stepText={step.stepText}
@@ -39,7 +40,7 @@
       {/each}
     </div>
 
-    <div class="max-w-md">
+    <div class="w-full ">
       <div class="flex border-b-2 border-gray-300 mb-4">
         {#each tabs as tab, index}
           <div
@@ -57,7 +58,7 @@
         {/each}
       </div>
 
-      <div class="p-4 bg-white rounded-lg">
+      <div class="p-2 bg-white rounded-lg ">
         {#if $activeTab === 0}
           <CompanyDetails />
         {:else}

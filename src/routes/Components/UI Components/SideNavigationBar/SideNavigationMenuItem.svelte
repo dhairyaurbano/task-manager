@@ -4,7 +4,7 @@
     export let label = ""; 
     export let labelclass = "text-sm font-medium ml-4";
     
-	import { activemenu } from "$lib/SystemTab/selectednavigationmenuitem";
+	import { activemenu } from "$lib/CompanyTab/selectednavigationmenuitem";
 
   </script>
   

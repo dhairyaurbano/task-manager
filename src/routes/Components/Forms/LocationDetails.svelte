@@ -2,7 +2,7 @@
 	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
 	import TextAreaView from "./FormComponents/TextAreaView.svelte";
 	import TextView from "./FormComponents/TextView.svelte";
-  import {activeTab, CompanyDetails,steps} from '../../../lib/SystemTab/formdatahandling.js'
+  import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
 
   function savedetials(){
     console.log("Company name: "+ $CompanyDetails.companyName);
@@ -29,9 +29,9 @@
         { value: "chennai", label: "Chennai" }
     ];
 </script>
-<div class="p-6 min-w-96 bg-[#00000015] rounded-lg shadow-md">
-  <div class="flex flex-row items-center justify-between mb-3 ">
-    <div><p class="text-2xl font-semibold text-gray-700">Location</p></div>
+<div class="p-6 w-full bg-[#00000015] rounded-lg shadow-md">
+  <div class="flex flex-row items-center justify-between">
+    <div><h2 class="text-2xl font-semibold text-gray-700 text-start mb-6">Location Details</h2></div>
     <ButtonComponent 
       bgcolor="bg-black" 
       leadingimg="/location_on_icon.png" 
@@ -46,7 +46,7 @@
   
     <form action="" method="POST">
 
-    <div class="">
+    <div class="mb-3">
       <label for="dropdown" class="block text-sm font-medium text-gray-600 ">
           Status Location
           <span class="text-red-500">*</span>

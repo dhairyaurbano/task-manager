@@ -7,14 +7,14 @@
   export let link=false;
 </script>
 <div class="flex flex-row  rounded-lg min-w-64 bg-white">
-    <div class=" grid grid-cols-1 justify-center">
         <!-- Outer Container with dynamic height based on content -->
         <div class="flex flex-col bg-white  min-w-64 rounded-lg px-2 mx-2 items-end text-right">
           <span class="text-[#26323881] font-sans text-sm">Step: {stepText}</span>
           <span class="text-[#1e1e1eec] font-semibold">{companyText}</span>
           <span class="text-[#1e1e1e] font-normal text-xs">{descriptionText}</span>
         </div>
-      </div>
+
+
       <div class="relative pt-1">
         <CircularBlock text={stepText} selectedStat={selected} />
         {#if link}
@@ -22,9 +22,5 @@
         <div class="w-0.5 h-16 absolute top-[54px] left-[25px] bg-[#00000017]"></div>
         <div class="h-[50px]"></div>
         {/if}
-      </div>
-
-
-    
-
+</div>
 </div>

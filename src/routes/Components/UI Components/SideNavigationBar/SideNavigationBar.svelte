@@ -13,7 +13,7 @@
 	import CompaniesIcon from '../Icons/CompaniesIcon.svelte';
 	import CompanyLogo from '../Icons/companyLogo.svelte';
 	import Searchbar from '../SearchBar/SearchBar.svelte';
-	import { activemenu } from "$lib/SystemTab/selectednavigationmenuitem";
+	import { activemenu } from "$lib/CompanyTab/selectednavigationmenuitem";
   let customlableclass="";
     const menuItems = [
     
