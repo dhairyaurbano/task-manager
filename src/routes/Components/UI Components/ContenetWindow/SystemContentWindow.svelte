@@ -25,9 +25,9 @@
     }
   </script>
   
-  <div class="w-full p-1 border-2 rounded-3xl border-[#D7D6D6] ">
-    <div class="flex flex-row p-3">
-      <div class="p-4 max-w-96  rounded-lg">
+  <div class="max-w-11/12 py-1 border-2 rounded-3xl border-[#D7D6D6] bg-red-100">
+    <div class="flex flex-row py-3">
+      <div class="p-3 max-w-96  rounded-lg">
         {#each $steps as step}
           <Step
             stepText={step.stepText}
@@ -39,8 +39,8 @@
         {/each}
       </div>
   
-      <div class="w-full ">
-        <div class="flex border-b-2 border-gray-300 mb-4">
+      <div class="w-11/12">
+        <div class="flex border-b-2 border-gray-300 mb-4 bg-amber-300 w-11/12">
           {#each tabs as tab, index}
             <div
               class="cursor-pointer px-6 py-2 text-lg font-semibold transition-colors duration-300 hover:text-sky-600"

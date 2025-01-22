@@ -23,20 +23,20 @@
 
 
 </script>
-<div class="p-6 w-full  rounded-lg shadow-md">
+<div class="p-6 w-full  rounded-lg shadow-md bg-amber-100 max-w-xl">
   
     <div><p class="text-2xl font-semibold text-gray-700 mb-6">System</p></div>
     
   
     <div class="w-full">
         
-        <div class="flex flex-row justify-between items-center ">
+        <div class="flex flex-row justify-between items-center bg-yellow-100">
             <!-- Red Div -->
-            <div class="flex items-center border-b-2 border-gray-300  overflow-x-auto">
-              <div class="flex">
+            <div class="flex items-center border-b-2 border-gray-300  bg-red-50">
+              <div class="flex bg-green-100  ">
                 {#each $systemSubTabs as tab, index}
                   <div
-                    class="cursor-pointer px-2 py-2 text-sm font-semibold transition-colors duration-300 hover:text-sky-600"
+                    class="cursor-pointer px-2 py-2 text-sm font-semibold transition-colors duration-300 hover:text-sky-600 "
                     class:text-[#01AFF2]={$activeSystemTab === index}
                     class:border-b-2={$activeSystemTab === index}
                     class:border-[#01AFF2]={$activeSystemTab === index}

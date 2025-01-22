@@ -8,16 +8,26 @@
 	import NotApplicable from "../TaskStatus/NotApplicable.svelte";
 	import Yes from "../TaskStatus/Yes.svelte";
 	import No from "../TaskStatus/No.svelte";
+	import InProgress from "../TaskStatus/InProgress.svelte";
+	import Otherstatus from "../TaskStatus/Otherstatus.svelte";
+	import TaskStatusDropDown from "../DropDownMenus/TaskStatusDropDown.svelte";
   
     let Statuswidget=NotApplicable;
 
     function getRelevantWidget(){
         if($taskDetails.statusoptions === "yes"){
-            Statuswidget= Yes;
+            // Statuswidget= Yes;
+            Statuswidget=TaskStatusDropDown;
         } else if($taskDetails.statusoptions === "no"){
             Statuswidget= No;
         } else if($taskDetails.statusoptions === "notapplicable"){
             Statuswidget= NotApplicable;
+        }
+        else if($taskDetails.statusoptions === "inprogress"){
+            Statuswidget= InProgress;
+        }
+        else if($taskDetails.statusoptions === "Otherstatus"){
+            Statuswidget= Otherstatus;
         } else {
             Statuswidget= NotApplicable;
         }
@@ -58,6 +68,8 @@
       { value: "yes", label: "Yes" },
       { value: "no", label: "No" },
       { value: "notapplicable", label: "Not Appllicable" },
+      { value: "inprogress", label: "In Progress" },
+      { value: "Otherstatus", label: "Other Status" },
     ];
   </script>
   
