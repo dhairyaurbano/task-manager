@@ -6,6 +6,7 @@
     import { activeTab, steps } from '../../../../lib/SystemTab/formdatahandling.js';
 	import SystemCompanyDetails from "../../Forms/SystemCompanyDetails.svelte";
 	import SystemDetails from "../../Forms/SystemDetails.svelte";
+	// import type { svelte } from "@sveltejs/vite-plugin-svelte";
   
     // Tabs Data
     let tabs = [
@@ -25,7 +26,7 @@
     }
   </script>
   
-  <div class="max-w-11/12 py-1 border-2 rounded-3xl border-[#D7D6D6] bg-red-100">
+  <div class="max-w-11/12 py-1 border-2 rounded-3xl border-[#D7D6D6] ">
     <div class="flex flex-row py-3">
       <div class="p-3 max-w-96  rounded-lg">
         {#each $steps as step}
@@ -40,7 +41,7 @@
       </div>
   
       <div class="w-full">
-        <div class="flex border-b-2 border-gray-300 mb-4 bg-amber-300 w-full">
+        <div class="flex border-b-2 border-gray-300 mb-4 w-full">
           {#each tabs as tab, index}
             <div
               class="cursor-pointer px-6 py-2 text-lg font-semibold transition-colors duration-300 hover:text-sky-600"

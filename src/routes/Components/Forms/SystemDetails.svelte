@@ -23,17 +23,17 @@
 
 
 </script>
-<div class="p-6 w-full  rounded-lg shadow-md bg-amber-100 ">
+<div class="p-6 w-full bg-[#00000015]  rounded-lg shadow-md  ">
   
     <div><p class="text-2xl font-semibold text-gray-700 mb-6">System</p></div>
     
   
     <div class="w-full">
         
-        <div class="flex flex-row justify-between items-center bg-yellow-100">
+        <div class="flex flex-row justify-between items-center ">
             <!-- Red Div -->
-            <div class="flex items-center border-b-2 border-gray-300  bg-red-50">
-              <div class="flex bg-green-100  ">
+            <div class="flex items-center border-b-2 border-gray-300  bg-white">
+              <div class="flex   ">
                 {#each $systemSubTabs as tab, index}
                   <div
                     class="cursor-pointer px-2 py-2 text-sm font-semibold transition-colors duration-300 hover:text-sky-600 "

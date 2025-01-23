@@ -1,5 +1,6 @@
 <script>
     import { tableData, isOpen } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
+    import { isDeletePopUpOpen } from '../../../../lib/TaskDetails/deletingtask.js';
     import Tableaddbutton from '../../Forms/FormComponents/Tableaddbutton.svelte';
 	import TablehoverButton from '../../Forms/FormComponents/TablehoverButton.svelte';
 	import TaskStatusDropDown from '../DropDownMenus/TaskStatusDropDown.svelte';
@@ -14,11 +15,18 @@
       ['2', 'New Task 2', TaskStatusDropDown],
       ['3', 'New Task 3', TaskStatusDropDown],
     ];
+
+
+    function OpenDeletePopUp(){
+      $isDeletePopUpOpen = true;
+      console.log('Delete pop up is open');
+    }
   
     function togglePopup() {
       $isOpen = !isOpen;
       console.log('toggle function executed successfully');
     }
+    $isDeletePopUpOpen=false;
   
     let columnStyles = ['min-w-24', 'flex-1', 'min-w-32']; // Fixed widths for "SL NO." and "Status", flexible for "Task"
   
@@ -93,18 +101,18 @@
 
 
 
- <div class="mx-1 my-2 rounded-lg border-2 border-red-700 overflow-x-auto overflow-y-visible max-w-5xl">
+ <div class="mx-1 my-2 rounded-lg border-2 border-gray-300 overflow-x-auto overflow-y-visible max-w-5xl">
     <!-- Fixed width container to restrict table growth -->
-    <div class="overflow-x-scroll overflow-y-visible bg-orange-400 ">
-      <table class="table-auto border-collapse ">
+    <div class="overflow-x-scroll overflow-y-visible  ">
+      <table class="table-auto border-collapse bg-white">
         <thead class="relative">
-          <tr class="border-b bg-green-100 ">
+          <tr class="border-b  ">
             {#each $tableData[0] as header, index}
             <th class={`px-4 py-2 text-left ${columnStyles[index]}  `}>
               <div class="absolute -right-2 z-50">
                 <Tableaddbutton onClick={addColumn} />
               </div>
-              <div class="flex justify-between {index === 1 ? 'min-w-64' : 'flex-auto'} items-center bg-red-100">
+              <div class="flex justify-between {index === 1 ? 'min-w-64' : 'flex-auto'} items-center ">
                 <span>{header}</span>
                 {#if header === 'Task'}
                 <Tableaddbutton onClick={addingTask} />
@@ -117,9 +125,9 @@
         
         <tbody>
           {#each $tableData.slice(1) as row,rowIndex}
-          <tr class="border-b group">
+          <tr class="border-b">
             {#each row as cell, index}
-            <td class={`px-4 py-2 text-center relative ${columnStyles[index]}`}>
+            <td class={`px-4 py-2 text-center relative ${columnStyles[index]} ${index === 1 ? 'group' : ''}`}>
               <div class="flex justify-center items-center h-full">
                 {#if typeof cell === 'function'}
                 <svelte:component this={cell} />

@@ -9,6 +9,7 @@
     }
   import {activeTab,activeSystemTab, CompanyDetailsSystemTab,steps, systemSubTabs} from '../../../lib/SystemTab/formdatahandling.js';
   import {isOpen} from '../../../lib/TaskDetails/addtaskdatahandling.js';
+  import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import SystemUpdateTaskandStatus from "./SystemUpdateTaskandStatus.svelte";
 
     function savedetials(){
@@ -18,6 +19,7 @@
   }
 
     $isOpen=false;
+    $isDeletePopUpOpen=false;
   const systemnameoptions = [
         { value: "system1", label: "System 1" },
         { value: "system2", label: "System 2" },

@@ -26,7 +26,7 @@
   }
 </script>
 
-<div class="w-full py-1 border-2 rounded-3xl border-[#D7D6D6] bg-red-100">
+<div class="w-full py-1 border-2 rounded-3xl border-[#D7D6D6] ">
   <div class="flex flex-row py-3">
     <div class="p-3 max-w-96  rounded-lg">
       {#each $steps as step}
