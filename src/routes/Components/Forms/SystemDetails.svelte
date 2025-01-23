@@ -23,7 +23,7 @@
 
 
 </script>
-<div class="p-6 w-full  rounded-lg shadow-md bg-amber-100 max-w-xl">
+<div class="p-6 w-full  rounded-lg shadow-md bg-amber-100 ">
   
     <div><p class="text-2xl font-semibold text-gray-700 mb-6">System</p></div>
     

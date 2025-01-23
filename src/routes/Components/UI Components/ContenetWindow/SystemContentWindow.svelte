@@ -39,8 +39,8 @@
         {/each}
       </div>
   
-      <div class="w-11/12">
-        <div class="flex border-b-2 border-gray-300 mb-4 bg-amber-300 w-11/12">
+      <div class="w-full">
+        <div class="flex border-b-2 border-gray-300 mb-4 bg-amber-300 w-full">
           {#each tabs as tab, index}
             <div
               class="cursor-pointer px-6 py-2 text-lg font-semibold transition-colors duration-300 hover:text-sky-600"

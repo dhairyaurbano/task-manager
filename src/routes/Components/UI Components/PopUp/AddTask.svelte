@@ -19,17 +19,17 @@
             // Statuswidget= Yes;
             Statuswidget=TaskStatusDropDown;
         } else if($taskDetails.statusoptions === "no"){
-            Statuswidget= No;
+            Statuswidget=   TaskStatusDropDown;
         } else if($taskDetails.statusoptions === "notapplicable"){
-            Statuswidget= NotApplicable;
+            Statuswidget= TaskStatusDropDown;
         }
         else if($taskDetails.statusoptions === "inprogress"){
-            Statuswidget= InProgress;
+            Statuswidget= TaskStatusDropDown;
         }
         else if($taskDetails.statusoptions === "Otherstatus"){
-            Statuswidget= Otherstatus;
+            Statuswidget= TaskStatusDropDown;
         } else {
-            Statuswidget= NotApplicable;
+            Statuswidget= TaskStatusDropDown;
         }
     }
     
@@ -54,7 +54,7 @@
         ];
         const numberOfColumns = $tableData[0].length;
         for (let i = newRow.length; i < numberOfColumns;i++) {
-            newRow.push(NotApplicable); // Add "Pending" for remaining columns
+            newRow.push(TaskStatusDropDown); 
         }
         tableData.update(data => {
             data.push(newRow);

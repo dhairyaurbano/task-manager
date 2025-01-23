@@ -1,6 +1,8 @@
 <script>
     import { tableData, isOpen } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
     import Tableaddbutton from '../../Forms/FormComponents/Tableaddbutton.svelte';
+	import TablehoverButton from '../../Forms/FormComponents/TablehoverButton.svelte';
+	import TaskStatusDropDown from '../DropDownMenus/TaskStatusDropDown.svelte';
     import AddTask from '../PopUp/AddTask.svelte';
     import NotApplicable from '../TaskStatus/NotApplicable.svelte';
     import Pending from '../TaskStatus/Pending.svelte';
@@ -8,9 +10,9 @@
   
     $tableData = [
       ['SL NO.', 'Task', 'Status 1'], // First row contains column headers
-      ['1', 'New Task 1', NotApplicable],
-      ['2', 'New Task 2', NotApplicable],
-      ['3', 'New Task 3', Yes],
+      ['1', 'New Task 1', TaskStatusDropDown],
+      ['2', 'New Task 2', TaskStatusDropDown],
+      ['3', 'New Task 3', TaskStatusDropDown],
     ];
   
     function togglePopup() {
@@ -26,7 +28,7 @@
       $tableData[0] = [...$tableData[0], newColumnName];
   
       for (let i = 1; i < $tableData.length; i++) {
-        $tableData[i] = [...$tableData[i], NotApplicable];
+        $tableData[i] = [...$tableData[i], TaskStatusDropDown];
       }
     }
   
@@ -91,9 +93,9 @@
 
 
 
- <div class="mx-1 my-2 rounded-lg border-2 border-red-700 overflow-x-auto">
+ <div class="mx-1 my-2 rounded-lg border-2 border-red-700 overflow-x-auto overflow-y-visible max-w-5xl">
     <!-- Fixed width container to restrict table growth -->
-    <div class="w-full overflow-x-visible">
+    <div class="overflow-x-scroll overflow-y-visible bg-orange-400 ">
       <table class="table-auto border-collapse ">
         <thead class="relative">
           <tr class="border-b bg-green-100 ">
@@ -114,10 +116,10 @@
         </thead>
         
         <tbody>
-          {#each $tableData.slice(1) as row}
-          <tr class="border-b">
+          {#each $tableData.slice(1) as row,rowIndex}
+          <tr class="border-b group">
             {#each row as cell, index}
-            <td class={`px-4 py-2 text-center ${columnStyles[index]}`}>
+            <td class={`px-4 py-2 text-center relative ${columnStyles[index]}`}>
               <div class="flex justify-center items-center h-full">
                 {#if typeof cell === 'function'}
                 <svelte:component this={cell} />
@@ -125,6 +127,13 @@
                 {cell}
                 {/if}
               </div>
+
+              {#if index === 1}
+              <div class="absolute top-1/2 right-2 transform -translate-y-1/2 hidden group-hover:block">
+                <TablehoverButton row={rowIndex}/>
+              </div>
+              {/if}
+
             </td>
             {/each}
           </tr>

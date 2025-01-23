@@ -1,0 +1,200 @@
+<script>
+	import ButtonComponent from "../FormComponents/ButtonComponent.svelte";
+	import InputText from "../FormComponents/InputText.svelte";
+	import AddTask from "./AddTask/AddTask.svelte";
+  import { isPopupVisible,statusCount,tableData } from "$lib/systemformdata";
+	import Pending from "./Task Status/Pending.svelte";
+	import Tableaddbutton from "../FormComponents/Tableaddbutton.svelte";
+
+  // let columns = ['SL NO.', 'Task', 'Status 1'];
+  // let rows = [
+  //   ['1', 'New Task 1', 'www.companywebsite.com'], 
+  //   ['2', 'New Task 2', 'www.anotherwebsite.com'], 
+  //   ['3', 'New Task 3', 'www.example.com']
+  // ];
+
+
+  $tableData = [
+    ['SL NO.', 'Task', 'Status 1'], // First row contains column headers
+    ['1', 'New Task 1', Pending],
+    ['2', 'New Task 2', Pending],
+    ['3', 'New Task 3', Pending]
+  ];
+
+
+  let minWidthcolumns=['min-w-32', 'min-w-64', 'min-w-32'];
+let selectedsystemname = "";
+let systemid="";
+
+
+$statusCount=1;
+
+
+const options = [
+    { value: "System1", label: "System1" },
+    { value: "System2", label: "System2" },
+    { value: "System3", label: "System3" }
+  ];
+
+
+  const onSaveDetailsClick = (event) => {
+      event.preventDefault();
+    console.log("Hoooo gayaa hai    ");
+  };
+
+function togglePopup() {
+  $isPopupVisible = !$isPopupVisible;
+}
+
+
+function addColumn() {
+  const newColumnName = Status ${$tableData[0].length - 1 };
+    
+    $tableData[0] = [...$tableData[0], newColumnName];
+
+    for (let i = 1; i < $tableData.length; i++) {
+      $tableData[i] = [...$tableData[i], Pending];
+    }
+  }
+
+</script>
+{#if $isPopupVisible}
+
+<AddTask/>
+{/if}
+<div class="flex  bg-blue-100 w-auto p-2 ">
+
+<form action="/system/Confirmation" method="POST">
+    <div class="m-3">
+        <label for="systemname" class="block text-sm font-medium text-gray-600 mb-1">
+            System Name
+        <span class="text-red-500">*</span>
+        </label>
+        <select
+        id="dropdown"
+        bind:value={selectedsystemname}
+        class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        required
+      >
+        <option value="" disabled selected>Select Systems</option>
+        {#each options as option}
+          <option value={option.value}>{option.label}</option>
+        {/each}
+      </select>
+    </div>
+    
+
+  <!-- System ID -->
+   <div class="m-3">
+    <InputText inputtype="number" id="systemid" fieldname="systemid" fieldLable="System ID" requiredCondition={true} hint="12345" bind:value={systemid}/>
+   </div>
+ 
+
+  <div class="flex flex-row justify-between items-center ">
+    <h2 class="text-2xl font-semibold text-gray-700 text-start mb-6">Update Task and Status</h2>
+    <div class="flex flex-row p-3"> 
+        <div class="p-3">
+            <ButtonComponent
+                    inputtype="button" 
+                    buttonLabel="Add Task" 
+                    buttonImageAlt="Add icon" 
+                    border="border-black"
+                    textcolor="border-black"
+                    buttonradius="rounded-md"
+                    hoverbgcolor="hover:bg-sky-100"
+                    buttonImage="./plussquare.png"
+                    handleclick="togglePopup" 
+                    bgcolor="bg-white"
+                    on:buttonClick={togglePopup}
+                    />
+        </div>
+
+
+                    <div class="p-3">
+                        <ButtonComponent
+                        inputtype="button" 
+                        buttonLabel="Import Template" 
+                        buttonImageAlt="import template" 
+                        border="border-gray-900"
+                        bgcolor='bg-gray-800'
+                        textcolor="text-white"
+                        buttonradius="rounded-md"
+                        buttonImage="./Upload.png"/>
+                    </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg border border-gray-300 flex bg-orange-400 w-auto overflow-x-auto relative">
+
+    <div class="absolute right-0 top-2 right-1 z-10 items-center">
+       <Tableaddbutton
+       on:buttonClick={addColumn}/>
+    </div>
+
+
+    <table class="table-auto border-collapse w-auto ">
+      <thead>
+        <tr class="border-b ">
+          <!-- Render table headers -->
+          {#each $tableData[0] as header,index}
+            <th class="px-4 py-2 bg-amber-400  relative {minWidthcolumns[index]}">
+              {#if header=="Task"}
+              <div class="absolute right-0 ">
+                <Tableaddbutton
+                on:buttonClick={togglePopup}/>
+             </div>
+              {/if}
+              <span>{header}</span>
+              <!-- <div class="flex items-center justify-between">
+                <svelte:component this={Tableaddbutton} />
+              </div> -->
+            </th>
+          {/each}
+        </tr>
+      </thead>
+  
+      <tbody>
+        <!-- Render table rows -->
+        {#each $tableData.slice(1) as row} <!-- Skiping the first row -->
+          <tr class="border-b">
+            {#each row as cell}
+              <td class="px-4 py-2">
+                {#if typeof cell === 'function'}
+                  <svelte:component this={cell} />
+                {:else}
+                  {cell}
+                {/if}
+              </td>
+            {/each}
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </div>
+
+<div class="p-3 mt-2 flex flex-row">
+
+  <div class="text-center mr-4">
+    <button type="button" class="bg-[#2900e22a]  border-2 
+   text-sky-500  py-2 px-4 rounded-full flex items-center justify-center gap-2 hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
+      <img src="/leftarrow.png" alt="back button" class="w-5 h-5" />
+    </button>
+  </div>
+
+  <ButtonComponent
+  inputtype="button" 
+    buttonLabel="Save & Next" 
+    buttonImageAlt="Save Icon" 
+    buttonImage="/rightarrow.png"
+    on:buttonClick={onSaveDetailsClick} 
+  />
+</div>
+  
+  
+
+</form>
+</div>
+
+
+// Code for subtab menu 
+

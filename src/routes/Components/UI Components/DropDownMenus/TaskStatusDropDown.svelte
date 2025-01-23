@@ -49,6 +49,7 @@
       selectedOption = option;
       isOpen = false;
     }
+    
   </script>
   
   <div class="relative w-64">
@@ -59,7 +60,7 @@
       on:click={toggleDropdown}
     >
       {#if selectedOption}
-        <div class="flex items-center">
+        <div class="flex items-center justify-center w-full">
           <div class={`rounded-full p-1 flex flex-row items-center ${selectedOption.bgColor}`}>
             <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${selectedOption.dotColor}`}></div>
             <span class={`font-normal mr-1 ${selectedOption.textColor} ml-3`}>
@@ -68,7 +69,16 @@
           </div>
         </div>
       {:else}
-        <span class="text-gray-500">Select an option</span>
+        <!-- <span class="text-gray-500">Select an option</span> -->
+
+        <div class="flex items-center justify-center w-full">
+          <div class={`rounded-full p-1 flex flex-row items-center ${options[2].bgColor}`}>
+            <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${options[2].dotColor}`}></div>
+            <span class={`font-normal mr-1 ${options[2].textColor} ml-3`}>
+              {options[2].label}
+            </span>
+          </div>
+        </div>
       {/if}
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +93,7 @@
     <!-- Dropdown Menu -->
     {#if isOpen}
       <div
-        class="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-green-100 border z-60 "
+        class="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-green-100 border z-70 "
         style="z-index: 9999;"
       >
         {#each options as option}
