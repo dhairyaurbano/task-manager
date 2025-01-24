@@ -1,8 +1,10 @@
 <script>
   import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
+  import {editable} from "$lib/TaskDetails/testingeditablefunctionality.js";
     function handleButtonClick(row){
         // Perform your desired actions here
-        console.log(`Row ${row} was clicked`);
+        // console.log(`Row ${row} was clicked`);
+        editable.set(true);
         
     }
     export let row=0;
