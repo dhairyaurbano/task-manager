@@ -1,32 +1,31 @@
 <script>
 
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
-  import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
+  import {isDeleteStatusPopUpOpen} from '../../../../lib/TaskDetails/deletingstatus.js';
   import {tableData} from "$lib/TaskDetails/addtaskdatahandling.js";
-  export let rowidx=$tableData.length-1;
+  export let colidx=$tableData[0].length-1;
 
   function ClosePanel() {
-      $isDeletePopUpOpen = false; 
+      $isDeleteStatusPopUpOpen = false; 
       console.log("Delete PopUp panel Closed");
-      console.log($isDeletePopUpOpen);
+      console.log($isDeleteStatusPopUpOpen);
     }
-  function DeleteRow(rowidx){
-    $isDeletePopUpOpen = true; 
+    function DeleteColumn(colidx) {
+  $isDeleteStatusPopUpOpen = true;
 
-    // Delete row logic here
-    console.log("Delete Row "+rowidx);
-    tableData.update(tableData => {
-      tableData.splice(rowidx, 1);
-      
-      return [...tableData]; 
+  console.log("Delete Column " + colidx);
+
+  tableData.update(currentData => {
+  
+    currentData = currentData.map(row => {
+      row.splice(colidx, 1); 
+      return row; 
     });
-    console.log("Updated Row count: "+$tableData.length);
-    rowidx=$tableData.length-1;
-    $isDeletePopUpOpen = false;
-    // for (let i = rowidx; i < $tableData.length; i++) {
-    //     $tableData[i][0] = (i + 1).toString(); 
-    //   } 
-  }
+    return [...currentData]; 
+  });
+
+  $isDeleteStatusPopUpOpen = false;
+}
 
 </script>
 <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -44,10 +43,10 @@
         <img src="/deletetaskimg.png" alt="Delete Image" class="w-[275px] h-[237px]" />
         <div class=" flex flex-col items-center justify-center ">
           <div class="flex">
-            <span class="text-2xl font-medium">Delete Task:</span>
+            <span class="text-2xl font-medium">Delete Status:</span>
           </div>
           <div>
-            <span class="text-xl font-normal">Do you want to delete this Task?</span>
+            <span class="text-xl font-normal">Do you want to delete this Status?</span>
           </div>
           <div class="flex my-5  items-center justify-center w-full">
             <div class="flex-1 flex justify-center items-center">
@@ -66,7 +65,7 @@
                 textcolor="text-white" 
                 bordercolor="border-red-500" 
                 rounded="rounded-xl"
-                onClick={()=>DeleteRow(rowidx)} 
+                onClick={()=>DeleteColumn(colidx)} 
               />
             </div>
           </div>

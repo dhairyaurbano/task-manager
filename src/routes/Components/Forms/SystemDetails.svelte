@@ -1,7 +1,7 @@
 <script>
-	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
-	import TextAreaView from "./FormComponents/TextAreaView.svelte";
-	import TextView from "./FormComponents/TextView.svelte";
+	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
+	import TextAreaView from "./FormComponents/Form UIComponents/TextAreaView.svelte";
+	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
   import {activeTab,activeSystemTab, CompanyDetailsSystemTab,steps, systemSubTabs} from '../../../lib/SystemTab/formdatahandling.js';
 	import LocationDetails from "./LocationDetails.svelte";
 	import SystemCompanyDetails from "./SystemCompanyDetails.svelte";
@@ -35,7 +35,7 @@
             <div class="flex items-center border-b-2 border-gray-300  bg-white">
               <div class="flex   ">
                 {#each $systemSubTabs as tab, index}
-                  <div
+                  <button
                     class="cursor-pointer px-2 py-2 text-sm font-semibold transition-colors duration-300 hover:text-sky-600 "
                     class:text-[#01AFF2]={$activeSystemTab === index}
                     class:border-b-2={$activeSystemTab === index}
@@ -45,7 +45,7 @@
                     }}
                   >
                     {tab}
-                  </div>
+                  </button>
                 {/each}
               </div>
             </div>
@@ -85,9 +85,9 @@
      
 </div>
 
-<style>
+<!-- <style>
   /* Optional styles for active link or hover effects */
   a:hover {
     transition: all 0.3s ease;
   }
-</style>
+</style> -->

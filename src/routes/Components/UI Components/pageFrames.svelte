@@ -10,13 +10,47 @@ import { activemenu } from "$lib/CompanyTab/selectednavigationmenuitem";
 	import SystemContentWindow from "./ContenetWindow/SystemContentWindow.svelte";
 	import NotificationsContenetWindow from "./ContenetWindow/NotificationsContenetWindow.svelte";
 	import SettingsContenetWindow from "./ContenetWindow/SettingsContenetWindow.svelte";
+	// let appbartitle="Add Company Details";
+	// let appbarsubtitle="Add Company Details to create company account";
+	import {title,subtitle} from "$lib/Appbar/titlehandling";
 
+	$: {
+		switch ($activemenu) {
+			case 0:
+				$title = "Dashboard";
+				$subtitle = "Overview of your system's data and insights.";
+				break;
+			case 1:
+				$title = "Users and Groups";
+				$subtitle = "Add, update, and manage user accounts.";
+				break;
+			case 2:
+				$title = "Companies";
+				$subtitle = "Manage company details and accounts.";
+				break;
+			case 3:
+				$title = "Create Template";
+				$subtitle = "Fill in the details for creating templates.";
+				break;
+			case 4:
+				$title = "System Configuration";
+				$subtitle = "Manage system-level settings and configurations.";
+				break;
+			case 5:
+				$title = "Notifications";
+				$subtitle = "View and manage system notifications.";
+				break;
+			default:
+				$title = "Settings";
+				$subtitle = "Adjust system and user preferences.";
+		}
+	}
 </script>
 <div class="flex">
     <SideNavigationbar/>
     <div class="bg-white flex-grow">
         <div class="flex flex-grow">
-            <Appbar title="Add Company Details" subtitle="Add Company Details to create company account"/>
+            <Appbar title="{$title}" subtitle="{$subtitle}"/>
         </div>
 <div class="p-4">
             {#if $activemenu === 0}

@@ -8,7 +8,7 @@ export const taskDetails = writable({
   export let isOpen = writable(false);
 
 
-  export const tableData = writable([
+  export let tableData = writable([
     ['SL NO.', 'Task', 'Status'], // First row contains column headers
     
 ]);

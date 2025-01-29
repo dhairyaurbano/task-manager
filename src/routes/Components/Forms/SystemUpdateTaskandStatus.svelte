@@ -1,11 +1,11 @@
 <script>
 
-	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
+	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
     import {isOpen} from '../../../lib/TaskDetails/addtaskdatahandling.js';
 	import AddTask from "../UI Components/PopUp/AddTask.svelte";
 	import SystemTabTable from "../UI Components/Tables/SystemTabTable.svelte";
     import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
-	import DeletingTaskPopup from "../UI Components/PopUp/DeletingTaskPopup.svelte";
+	// import DeletingTaskPopup from "../UI Components/PopUp/DeletingTaskPopup.svelte";
 
     // $isOpen=false;
     function addingTask(){
@@ -22,9 +22,7 @@
 <AddTask/>
 {/if}
 
-{#if $isDeletePopUpOpen}
-<DeletingTaskPopup/>
-{/if}
+
 <div class="flex flex-col ">
     <div class="flex flex-row justify-between items-center ">
         <div class=" flex justify-center items-center ">

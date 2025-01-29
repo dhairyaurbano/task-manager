@@ -3,6 +3,7 @@
   
     let isOpen = false; // Controls dropdown visibility
     let selectedOption = null; // Holds the selected option
+    let dropdowniconVisible = false;
     let options = [
       {
         id: 1,
@@ -56,8 +57,10 @@
     <!-- Dropdown Trigger -->
     <button
     type="button"
-      class="w-full flex items-center justify-between px-4 py-2 border rounded-lg bg-white shadow-sm hover:shadow-md z-30"
+      class="w-full flex items-center justify-between px-4 py-2 hover:border rounded-lg bg-white  hover:shadow-md z-30"
       on:click={toggleDropdown}
+      on:mouseenter={() => dropdowniconVisible = true}  
+      on:mouseleave={() => dropdowniconVisible = false}
     >
       {#if selectedOption}
         <div class="flex items-center justify-center w-full">
@@ -69,7 +72,7 @@
           </div>
         </div>
       {:else}
-        <!-- <span class="text-gray-500">Select an option</span> -->
+        
 
         <div class="flex items-center justify-center w-full">
           <div class={`rounded-full p-1 flex flex-row items-center ${options[2].bgColor}`}>
@@ -80,6 +83,7 @@
           </div>
         </div>
       {/if}
+      {#if dropdowniconVisible}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-5 w-5 text-gray-500"
@@ -88,12 +92,13 @@
       >
         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
       </svg>
+      {/if}
     </button>
   
     <!-- Dropdown Menu -->
     {#if isOpen}
       <div
-        class="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-green-100 border z-70 "
+        class="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-white border z-70 "
         style="z-index: 9999;"
       >
         {#each options as option}

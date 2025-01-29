@@ -1,5 +1,5 @@
 <script>
-	import EditText from "../../../Forms/FormComponents/EditText.svelte";
+	import EditText from "../../../Forms/FormComponents/Form UIComponents/EditText.svelte";
 
     // export let edit=true;
     export let textValue = 'Status 1';

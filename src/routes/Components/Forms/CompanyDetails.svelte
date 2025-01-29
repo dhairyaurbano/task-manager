@@ -1,8 +1,8 @@
 <script>
-  import TextAreaView from "./FormComponents/TextAreaView.svelte";
-  import TextView from "./FormComponents/TextView.svelte";
+  import TextAreaView from "./FormComponents/Form UIComponents/TextAreaView.svelte";
+  import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
   import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
-	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
+	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
 
   function updateSteps(index) {
     steps.update((allSteps) =>

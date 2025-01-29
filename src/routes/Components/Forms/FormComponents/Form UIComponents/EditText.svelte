@@ -1,6 +1,6 @@
 <script>
-  import { editable  ,hoverbuttonvisible} from "$lib/TaskDetails/testingeditablefunctionality.js";
-	import TablehoverButton from "./TablehoverButton.svelte";
+  import { editable  } from "$lib/TaskDetails/testingeditablefunctionality.js";
+	import StatusColumnHoverButton from "../Buttons/HoverButtons/StatusColumnHoverButton.svelte";
 
     export let value = '';
     // export let edit=true;
@@ -15,14 +15,14 @@
     if (event.key === 'Enter') {
       editable.set(false);
     }
-    
   }
-  hoverbuttonvisible.set(false);
+  let hoverbuttonvisible=false;
+  // hoverbuttonvisible.set(false);
 
   </script>
   <div class="relative"
-  on:mouseenter={() => hoverbuttonvisible.set(true)} 
-  on:mouseleave={() => { hoverbuttonvisible.set(false); editable.set(false); }}
+  on:mouseenter={() => hoverbuttonvisible=true} 
+  on:mouseleave={() => { hoverbuttonvisible=false; editable.set(false); }}
 >
   <input
     type="text"
@@ -31,13 +31,13 @@
     on:input={handleInput}
     on:keydown={handleKeyDown}
     disabled={!$editable}
-    class="border border-gray-300 rounded-md p-2 text-lg w-full focus:border-blue-500 focus:outline-none shadow-none border-none"
+    class="border border-gray-300 rounded-md p-2 text-lg w-full focus:border-blue-500 focus:outline-none shadow-none border-none text-center"
    />
  
 
-   {#if $hoverbuttonvisible}
+   {#if hoverbuttonvisible}
    <div class="absolute right-1 top-1/2 transform -translate-y-1/2">
-     <TablehoverButton />
+     <StatusColumnHoverButton />
    </div>
  {/if}
 

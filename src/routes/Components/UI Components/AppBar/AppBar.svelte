@@ -1,5 +1,5 @@
 <script>
-	import ButtonComponent from "../../Forms/FormComponents/ButtonComponent.svelte";
+	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
 
     export let title = "App Title";
     export let subtitle = "App Subtitle";

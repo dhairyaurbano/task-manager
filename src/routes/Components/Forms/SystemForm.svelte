@@ -1,8 +1,8 @@
 <script>
-	import ButtonComponent from "./FormComponents/ButtonComponent.svelte";
+	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
+    import { tableData } from '$lib/TaskDetails/addtaskdatahandling.js';
 
-
-	import TextView from "./FormComponents/TextView.svelte";
+	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
     function goback(){
         window.history.back();
         console.log("Back button clicked");
@@ -19,13 +19,19 @@
   }
 
     $isOpen=false;
-    $isDeletePopUpOpen=false;
+    // $isDeletePopUpOpen=false;
   const systemnameoptions = [
         { value: "system1", label: "System 1" },
         { value: "system2", label: "System 2" },
         { value: "system3", label: "System 3" }
     ];
 
+
+
+  function showtable(){
+    console.log("showing table");
+    console.table($tableData);
+  }
 </script>
 <form action="" method="POST">
 
@@ -94,6 +100,24 @@
      onClick={savedetials}
      />
        </div>
+
+
+       <div class="mx-2"> 
+        <!-- Save Button -->
+   <ButtonComponent
+  label="ShowTable"
+  bgcolor="bg-black"
+  textcolor="text-white"
+  bordercolor="border-sky-500"
+  focusringcolor="focus:ring-sky-400"
+  hoverbg="hover:bg-sky-50"
+  rounded="rounded-full"
+  laggingimg=""
+  laggingalt=""
+  type="button"
+  onClick={showtable}
+  />
+    </div>
        
    </div>
 

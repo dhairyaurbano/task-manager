@@ -2,6 +2,12 @@
     import TextAreaView from "../../Forms/FormComponents/Form UIComponents/TextAreaView.svelte";
     import TextView from "../../Forms/FormComponents/Form UIComponents/TextView.svelte";
     import { taskDetails,isOpen,tableData} from "$lib/TaskDetails/addtaskdatahandling.js";
+
+
+
+
+    import { isEditTaskPopUpOpen} from "$lib/TaskDetails/openeditTaskPopUp.js";
+
     import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
 	import Pending from "../TaskStatus/Pending.svelte";
 	import Applicable from "../TaskStatus/Applicable.svelte";
@@ -11,7 +17,103 @@
 	import InProgress from "../TaskStatus/InProgress.svelte";
 	import Otherstatus from "../TaskStatus/Otherstatus.svelte";
 	import TaskStatusDropDown from "../DropDownMenus/TaskStatusDropDown.svelte";
+  // import { getFilteredWords, insertWord, insertMultipleWords,createTrie } from '$lib/Logic/autoSuggestion.js';
+  // import { writable } from 'svelte/store';
+  // const filteredWords = writable([]);
+  // let searchQuery = "";
+  // let selectedPerson = "";
+
+
+  // const dictionary = [
+  //   "dhairya", "dhyey", "aman", "amiab", "rhekha", "jaya",
+  //   "sushma", "naman", "pankaj", "dharmesh", "dhavan"
+  // ];
+  // const trie = createTrie(dictionary);
+
+  // function filterWords() {
+  //   const results = trie.search(searchQuery);
+  //   filteredWords.set(results);
+  // }
+
+  // function selectPerson(name) {
+  //   selectedPerson = name;
+  //   searchQuery = name; // Update the input field with the selected name
+  //   filteredWords.set([]); // Clear the dropdown menu
+  // }
+
+
+
+  // import { writable } from 'svelte/store';
+
+  // export const filteredWords = writable([]);
+  // let selectedPerson = ""; // Store the selected person's name
+
+  // const dictionary = [
+  //   "dhairya", "dhyey", "aman", "amiab", "rhekha", "jaya",
+  //   "sushma", "naman", "pankaj", "dharmesh", "dhavan"
+  // ];
+
+  // class TrieNode {
+  //   constructor() {
+  //     this.children = {};
+  //     this.isEnd = false;
+  //   }
+  // }
+
+  // class Trie {
+  //   constructor() {
+  //     this.root = new TrieNode();
+  //   }
+
+  //   insert(word) {
+  //     let node = this.root;
+  //     for (const char of word) {
+  //       if (!node.children[char]) {
+  //         node.children[char] = new TrieNode();
+  //       }
+  //       node = node.children[char];
+  //     }
+  //     node.isEnd = true;
+  //   }
+
+  //   dfs(node, prefix, results) {
+  //     if (node.isEnd) results.push(prefix);
+
+  //     for (const char in node.children) {
+  //       this.dfs(node.children[char], prefix + char, results);
+  //     }
+  //   }
+
+  //   search(prefix) {
+  //     let node = this.root;
+  //     for (const char of prefix) {
+  //       if (!node.children[char]) return [];
+  //       node = node.children[char];
+  //     }
+  //     const results = [];
+  //     this.dfs(node, prefix, results);
+  //     return results;
+  //   }
+  // }
+
+  // const trie = new Trie();
+  // dictionary.forEach(word => trie.insert(word));
+
+  // let searchQuery = "";
+
+  // function filterWords() {
+  //   const results = trie.search(searchQuery);
+  //   filteredWords.set(results);
+  // }
+
+  // function selectPerson(name) {
+  //   selectedPerson = name;
+  //   searchQuery = name; // Update the input field with the selected name
+  //   filteredWords.set([]); // Clear the dropdown menu
+  // }
   
+
+
     let Statuswidget=NotApplicable;
 
     function getRelevantWidget(){
@@ -35,9 +137,9 @@
     
   
     function toggleSystemPanel() {
-      $isOpen = false; 
+      $isEditTaskPopUpOpen = false; 
       console.log("System panel closed");
-      console.log($isOpen);
+      console.log($isEditTaskPopUpOpen);
     }
   
     function saveallUpdates() {
@@ -65,11 +167,11 @@
     }
   
     const taskoptions = [
-      { value: "yes", label: "Yes" },
-      { value: "no", label: "No" },
-      { value: "notapplicable", label: "Not Appllicable" },
-      { value: "inprogress", label: "In Progress" },
-      { value: "Otherstatus", label: "Other Status" },
+      { value: "dhiraj", label: "Dhirya" },
+      { value: "jatin", label: "Jatin" },
+      { value: "rohan", label: "Rohan" },
+      { value: "mohan", label: "Mohan" },
+      { value: "sohan", label: "Rohan" },
     ];
   </script>
   
@@ -79,7 +181,7 @@
     <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
       <!-- Header -->
       <div class="flex flex-row justify-between items-center">
-        <p class="text-2xl font-semibold text-gray-700">System</p>
+        <p class="text-2xl font-semibold text-gray-700">Edit Task</p>
         <button
           type="button"
           class="py-2 px-3 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -119,9 +221,9 @@
           </div>
         
   
-        <div>
+        <!-- <div>
           <label for="dropdown" class="block text-sm font-medium text-gray-600">
-            Status Options
+            Assign to
             <span class="text-red-500">*</span>
           </label>
           <select
@@ -135,8 +237,19 @@
               <option value={option.value}>{option.label}</option>
             {/each}
           </select>
-        </div>
+        </div> -->
+
+        <!-- Here there was a pop up which I have removed as far -->
+
+        
+
+
+
       </div>
+
+
+
+
   
       <!-- Footer -->
       <div class="flex justify-end mt-6">
