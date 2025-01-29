@@ -1,5 +1,5 @@
 <script>
-  import {isDeletePopUpOpen} from '$lib/TaskDetails/deletingtask.js';
+  import {isDeletePopUpOpen,deletingrowidx} from '$lib/TaskDetails/deletingtask.js';
   import {editable} from "$lib/TaskDetails/testingeditablefunctionality.js";
   import {isEditTaskPopUpOpen} from "$lib/TaskDetails/openeditTaskPopUp.js";
 
@@ -11,21 +11,22 @@
         // Perform your desired actions here
         // editable.set(true);
         $isEditTaskPopUpOpen=true;
-        console.log("OOOOOOOOOOOOOOOOOOOO what is he up to");
+        // console.log("OOOOOOOOOOOOOOOOOOOO what is he up to");
         
     }
     // $isDeletePopUpOpen=false;
 
     function openDeletePopUp(row){
       console.log(`Row ${row} was clicked`);
+      $deletingrowidx=row;
       $isDeletePopUpOpen=true;
-      console.log("Delete panel opened");
+      // console.log("Delete panel opened");
       // console.log("Variable status: " + $isDeletePopUpOpen);
     }
 </script>
 
 {#if $isDeletePopUpOpen}
-<DeletingTaskPopup rowidx={row}/>
+<DeletingTaskPopup/>
 {/if}
 <!-- edit button -->
 <div class=" inline-block">

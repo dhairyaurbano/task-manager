@@ -2,30 +2,28 @@
 
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
   import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
-  import {tableData} from "$lib/TaskDetails/addtaskdatahandling.js";
-  export let rowidx=$tableData.length-1;
+  import { tableData } from "$lib/TaskDetails/addtaskdatahandling.js";
+  import { deletingrowidx } from "$lib/TaskDetails/deletingtask.js";
+
+  // export let rowidx=1;
 
   function ClosePanel() {
-      $isDeletePopUpOpen = false; 
-      console.log("Delete PopUp panel Closed");
-      console.log($isDeletePopUpOpen);
+    isDeletePopUpOpen.set(false); 
     }
-  function DeleteRow(rowidx){
-    $isDeletePopUpOpen = true; 
+  function DeleteRow(){
+    isDeletePopUpOpen.set(true);
 
-    // Delete row logic here
-    console.log("Delete Row "+rowidx);
-    tableData.update(tableData => {
-      tableData.splice(rowidx, 1);
-      
-      return [...tableData]; 
-    });
-    console.log("Updated Row count: "+$tableData.length);
-    rowidx=$tableData.length-1;
-    $isDeletePopUpOpen = false;
-    // for (let i = rowidx; i < $tableData.length; i++) {
-    //     $tableData[i][0] = (i + 1).toString(); 
-    //   } 
+        console.log("Delete Row " + $deletingrowidx);
+
+        tableData.update(data => {
+            console.table(data);
+            const updatedData = [...data]; 
+            updatedData.splice($deletingrowidx, 1);
+            console.table(updatedData);
+            return updatedData; 
+        });
+
+        isDeletePopUpOpen.set(false); 
   }
 
 </script>
@@ -66,7 +64,7 @@
                 textcolor="text-white" 
                 bordercolor="border-red-500" 
                 rounded="rounded-xl"
-                onClick={()=>DeleteRow(rowidx)} 
+                onClick={()=>DeleteRow()} 
               />
             </div>
           </div>

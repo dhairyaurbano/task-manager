@@ -21,6 +21,9 @@
       [1, 'New Task 1', TaskStatusDropDown],
       [2, 'New Task 2', TaskStatusDropDown],
       [3, 'New Task 3', TaskStatusDropDown],
+      [4, 'New Task 4', TaskStatusDropDown],
+      [5, 'New Task 5', TaskStatusDropDown],
+      [6, 'New Task 6', TaskStatusDropDown],
     ];
 
 
@@ -132,7 +135,7 @@ function addingTask(){
                 
                 <div class="">
                   
-                <TaskCell taskname={cell} assignedTo="Unassigned" rowidx={rowIndex} />
+                <TaskCell taskname={cell} assignedTo="Unassigned" rowidx={rowIndex+1} />
               </div>
                 {/if}
               </div>
