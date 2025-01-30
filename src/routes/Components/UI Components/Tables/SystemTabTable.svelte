@@ -5,24 +5,21 @@
 	import TaskCellhoverButton from '../../Forms/FormComponents/Buttons/HoverButtons/TaskCellhoverButton.svelte';
 	import TaskStatusDropDown from '../DropDownMenus/TaskStatusDropDown.svelte';
 	import DeletingTaskPopup from '../PopUp/DeletingTaskPopup.svelte';
-    import NotApplicable from '../TaskStatus/NotApplicable.svelte';
-    import Pending from '../TaskStatus/Pending.svelte';
-    import Yes from '../TaskStatus/Yes.svelte';
 	import StatusCell from './TableComponent/StatusCell.svelte';
   import {isDeleteStatusPopUpOpen} from '$lib/TaskDetails/deletingstatus.js';
   import {isEditTaskPopUpOpen} from '$lib/TaskDetails/editingtask.js';
 	import DeletingStatusPopup from '../PopUp/DeletingStatusPopup.svelte';
 	import TaskCell from './TableComponent/TaskCell.svelte';
 	import EditTaskPopUp from '../PopUp/EditTaskPopUp.svelte';
-  let Statuswidget=TaskStatusDropDown;
+  // let Statuswidget=TaskStatusDropDown;
     $tableData = [
       ['SL NO.', 'Task', 'Status 1'], // First row contains column headers
-      [1, 'New Task 1', TaskStatusDropDown],
-      [2, 'New Task 2', TaskStatusDropDown],
-      [3, 'New Task 3', TaskStatusDropDown],
-      [4, 'New Task 4', TaskStatusDropDown],
-      [5, 'New Task 5', TaskStatusDropDown],
-      [6, 'New Task 6', TaskStatusDropDown],
+      [1, 'New Task 1', "Pending"],
+      [2, 'New Task 2', "In Progress"],
+      [3, 'New Task 3', "Yes"],
+      [4, 'New Task 4', "Yes"],
+      [5, 'New Task 5', "Yes"],
+      [6, 'New Task 6', "Yes"],
     ];
     $assignee=[["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""]];
 
@@ -44,20 +41,20 @@
       $tableData[0] = [...$tableData[0], newColumnName];
   
       for (let i = 1; i < $tableData.length; i++) {
-        $tableData[i] = [...$tableData[i], TaskStatusDropDown];
+        $tableData[i] = [...$tableData[i], "Pending"];
       }
     }
   
 
 function addingTask(){
   const newRow = [
-            $tableData.length, // SL NO.
-            "New Task", // Task Name
-            Statuswidget // Status (depending on taskDetails.statusoptions)
+            $tableData.length, 
+            "New Task",
+            "Pending" 
         ];
         const numberOfColumns = $tableData[0].length;
         for (let i = newRow.length; i < numberOfColumns;i++) {
-            newRow.push(TaskStatusDropDown); 
+            newRow.push("Pending"); 
         }
         tableData.update(data => {
             data.push(newRow);
@@ -130,20 +127,17 @@ function addingTask(){
             {#each row as cell, index}
             <td class={`px-4 py-2 text-center relative ${columnStyles[index]} ${index === 1 ? 'group' : ''}`}>
               <div class="flex justify-center items-center h-full">
-                {#if index==0}
-                <div class="flex-1">
-                  <span>{rowIndex+1}</span>
-                </div>
-                {/if}
-                {#if typeof cell === 'function'}
-                <svelte:component this={cell} />
-                {:else if index===1}
-                
-                <div class="">
-                  
-                <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex+1} />
-              </div>
-                {/if}
+                {#if index == 0}
+            <div class="flex-1">
+              <span>{rowIndex + 1}</span>
+            </div>
+          {:else if index === 1}
+            <div>
+              <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} />
+            </div>
+          {:else}
+            <TaskStatusDropDown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} />
+          {/if}
               </div>
   
               

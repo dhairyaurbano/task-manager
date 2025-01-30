@@ -10,13 +10,13 @@
     // $isOpen=false;
     function addingTask(){
         const newRow = [
-            $tableData.length, // SL NO.
-            "New Task", // Task Name
-            TaskStatusDropDown // Status (depending on taskDetails.statusoptions)
+            $tableData.length,
+            "New Task",
+            "Pending"
         ];
         const numberOfColumns = $tableData[0].length;
         for (let i = newRow.length; i < numberOfColumns;i++) {
-            newRow.push(TaskStatusDropDown); 
+            newRow.push("Pending"); 
         }
         tableData.update(data => {
             data.push(newRow);

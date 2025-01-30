@@ -1,120 +1,106 @@
 <script>
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
+  export let statusValue = "Pending";
+  let isOpen = false; 
+  let dropdowniconVisible = false;
   
-    let isOpen = false; 
-    let selectedOption = null; 
-    let dropdowniconVisible = false;
-    let options = [
-      {
-        id: 1,
-        label: "Yes",
-        bgColor: "bg-green-100",
-        textColor: "text-green-700",
-        dotColor: "bg-green-700",
-      },
-      {
-        id: 2,
-        label: "No",
-        bgColor: "bg-red-100",
-        textColor: "text-red-700",
-        dotColor: "bg-red-700",
-      },
-      {
-        id: 3,
-        label: "Not Applicable",
-        bgColor: "bg-yellow-100",
-        textColor: "text-yellow-700",
-        dotColor: "bg-yellow-700",
-      },
-      {
-        id: 4,
-        label: "In Progress",
-        bgColor: "bg-blue-100",
-        textColor: "text-blue-700",
-        dotColor: "bg-blue-700",
-      },
-      {
-        id: 5,
-        label: "Other Status",
-        bgColor: "bg-fuchsia-100",
-        textColor: "text-fuchsia-700",
-        dotColor: "bg-fuchsia-700",
-      },
-    ];
-  
-    function toggleDropdown() {
-      isOpen = !isOpen;
-    }
-  
-    function selectOption(option) {
-      selectedOption = option;
-      isOpen = false;
-    }
-    
-  </script>
-  
-  <div class="relative w-64">
-    <!-- Dropdown Trigger -->
-    <button
-    type="button"
-      class="w-full flex items-center justify-between px-4 py-2 hover:border rounded-lg bg-white  hover:shadow-md z-30"
-      on:click={toggleDropdown}
-      on:mouseenter={() => dropdowniconVisible = true}  
-      on:mouseleave={() => dropdowniconVisible = false}
-    >
-      {#if selectedOption}
-        <div class="flex items-center justify-center w-full">
-          <div class={`rounded-full p-1 flex flex-row items-center ${selectedOption.bgColor}`}>
-            <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${selectedOption.dotColor}`}></div>
-            <span class={`font-normal mr-1 ${selectedOption.textColor} ml-3`}>
-              {selectedOption.label}
-            </span>
-          </div>
-        </div>
-      {:else}
-        
+  let options = [
+    {
+      id: 1,
+      label: "Yes",
+      bgColor: "bg-green-100",
+      textColor: "text-green-700",
+      dotColor: "bg-green-700",
+    },
+    {
+      id: 2,
+      label: "No",
+      bgColor: "bg-red-100",
+      textColor: "text-red-700",
+      dotColor: "bg-red-700",
+    },
+    {
+      id: 3,
+      label: "Not Applicable",
+      bgColor: "bg-yellow-100",
+      textColor: "text-yellow-700",
+      dotColor: "bg-yellow-700",
+    },
+    {
+      id: 4,
+      label: "In Progress",
+      bgColor: "bg-blue-100",
+      textColor: "text-blue-700",
+      dotColor: "bg-blue-700",
+    },
+    {
+      id: 5,
+      label: "Other Status",
+      bgColor: "bg-fuchsia-100",
+      textColor: "text-fuchsia-700",
+      dotColor: "bg-fuchsia-700",
+    },
+  ];
 
-        <div class="flex items-center justify-center w-full">
-          <div class={`rounded-full p-1 flex flex-row items-center ${options[2].bgColor}`}>
-            <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${options[2].dotColor}`}></div>
-            <span class={`font-normal mr-1 ${options[2].textColor} ml-3`}>
-              {options[2].label}
-            </span>
-          </div>
-        </div>
-      {/if}
-      {#if dropdowniconVisible}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5 text-gray-500"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-      </svg>
-      {/if}
-    </button>
-  
-    <!-- Dropdown Menu -->
-    {#if isOpen}
-      <div
-        class="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-white border z-70 "
-        style="z-index: 9999;"
-      >
-        {#each options as option}
-          <div
-            class="cursor-pointer px-4 py-1 hover:bg-gray-100 flex items-center justify-center text-center"
-            on:click={() => selectOption(option)}
-          >
-            <div class={`rounded-full p-1 flex flex-row items-center ${option.bgColor}`}>
-              <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${option.dotColor}`}></div>
-              <span class={`font-normal mr-1 ${option.textColor} ml-3`}>
-                {option.label}
-              </span>
-            </div>
-          </div>
-        {/each}
-      </div>
-    {/if}
+  let selectedOption = options.find(option => option.label === statusValue) || options[2];
+
+  function toggleDropdown() {
+    isOpen = !isOpen;
+  }
+
+  function selectOption(option) {
+    selectedOption = option;
+    statusValue = option.label;
+    isOpen = false;
+  }
+</script>
+
+<div class="relative w-64">
+<!-- Dropdown Trigger -->
+<button
+  type="button"
+  class="w-full flex items-center justify-between px-4 py-2 hover:border rounded-lg bg-white hover:shadow-md z-30"
+  on:click={toggleDropdown}
+  on:mouseenter={() => dropdowniconVisible = true}  
+  on:mouseleave={() => dropdowniconVisible = false}
+>
+  <div class="flex items-center justify-center w-full">
+    <div class={`rounded-full p-1 flex flex-row items-center ${selectedOption.bgColor}`}>
+      <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${selectedOption.dotColor}`}></div>
+      <span class={`font-normal mr-1 ${selectedOption.textColor} ml-3`}>
+        {selectedOption.label}
+      </span>
+    </div>
   </div>
   
+  {#if dropdowniconVisible}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-500"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+  {/if}
+</button>
+
+<!-- Dropdown Menu -->
+{#if isOpen}
+  <div class="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-white border z-70 " style="z-index: 9999;">
+    {#each options as option}
+      <div
+        class="cursor-pointer px-4 py-1 hover:bg-gray-100 flex items-center justify-center text-center"
+        on:click={() => selectOption(option)}
+      >
+        <div class={`rounded-full p-1 flex flex-row items-center ${option.bgColor}`}>
+          <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${option.dotColor}`}></div>
+          <span class={`font-normal mr-1 ${option.textColor} ml-3`}>
+            {option.label}
+          </span>
+        </div>
+      </div>
+    {/each}
+  </div>
+{/if}
+</div>
