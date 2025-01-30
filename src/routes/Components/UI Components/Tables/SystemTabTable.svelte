@@ -1,17 +1,16 @@
 <script>
-    import { tableData } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
+    import { tableData,assignee } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
     import { isDeletePopUpOpen } from '../../../../lib/TaskDetails/deletingtask.js';
     import Tableaddbutton from '../../Forms/FormComponents/Buttons/UIButtons/Tableaddbutton.svelte';
 	import TaskCellhoverButton from '../../Forms/FormComponents/Buttons/HoverButtons/TaskCellhoverButton.svelte';
 	import TaskStatusDropDown from '../DropDownMenus/TaskStatusDropDown.svelte';
-    import AddTask from '../PopUp/AddTask.svelte';
 	import DeletingTaskPopup from '../PopUp/DeletingTaskPopup.svelte';
     import NotApplicable from '../TaskStatus/NotApplicable.svelte';
     import Pending from '../TaskStatus/Pending.svelte';
     import Yes from '../TaskStatus/Yes.svelte';
 	import StatusCell from './TableComponent/StatusCell.svelte';
   import {isDeleteStatusPopUpOpen} from '$lib/TaskDetails/deletingstatus.js';
-  import {isEditTaskPopUpOpen} from '$lib/TaskDetails/openeditTaskPopUp.js';
+  import {isEditTaskPopUpOpen} from '$lib/TaskDetails/editingtask.js';
 	import DeletingStatusPopup from '../PopUp/DeletingStatusPopup.svelte';
 	import TaskCell from './TableComponent/TaskCell.svelte';
 	import EditTaskPopUp from '../PopUp/EditTaskPopUp.svelte';
@@ -25,6 +24,8 @@
       [5, 'New Task 5', TaskStatusDropDown],
       [6, 'New Task 6', TaskStatusDropDown],
     ];
+    $assignee=[["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""]];
+
 
 
     function OpenDeletePopUp(){
@@ -62,6 +63,11 @@ function addingTask(){
             data.push(newRow);
             return data;
         });
+
+        assignee.update(data => {
+            data.push(["Unassigned",""]);
+            return data;
+        });
 }
 
 
@@ -88,7 +94,7 @@ function addingTask(){
           <tr class="border-b overflow-x-visible">
             {#each $tableData[0] as header, index}
             <th class={`px-4 py-2 flex-1  `}>
-              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative bg-red-100' : (index===0)?'min-w-16':'min-w-64'} ">
+              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative ' : (index===0)?'min-w-16':'min-w-64'} ">
                 {#if index >= 2}
                 <div class="">
                   <StatusCell textValue={header} />
@@ -135,7 +141,7 @@ function addingTask(){
                 
                 <div class="">
                   
-                <TaskCell taskname={cell} assignedTo="Unassigned" rowidx={rowIndex+1} />
+                <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex+1} />
               </div>
                 {/if}
               </div>

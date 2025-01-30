@@ -19,7 +19,15 @@
           <span class="font-medium">{taskname}</span>
       </div>
       <div class="flex items-center justify-center">
-          <span class="font-light">{assignedTo}</span>
+        <span class="font-light">
+            {#if assignedTo !== "Not assigned"}
+              Assigned to {assignedTo}
+            {:else}
+              Unassigned
+            {/if}
+          </span>
+          
+
       </div>
   </div>
   

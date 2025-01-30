@@ -1,6 +1,6 @@
 <script>
 	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
-    import { tableData } from '$lib/TaskDetails/addtaskdatahandling.js';
+    import { tableData,isOpen } from '$lib/TaskDetails/addtaskdatahandling.js';
 
 	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
     function goback(){
@@ -8,7 +8,6 @@
         console.log("Back button clicked");
     }
   import {activeTab,activeSystemTab, CompanyDetailsSystemTab,steps, systemSubTabs} from '../../../lib/SystemTab/formdatahandling.js';
-  import {isOpen} from '../../../lib/TaskDetails/addtaskdatahandling.js';
   import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import SystemUpdateTaskandStatus from "./SystemUpdateTaskandStatus.svelte";
 

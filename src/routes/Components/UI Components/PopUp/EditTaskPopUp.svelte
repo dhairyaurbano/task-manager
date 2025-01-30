@@ -1,273 +1,239 @@
 <script>
-    import TextAreaView from "../../Forms/FormComponents/Form UIComponents/TextAreaView.svelte";
-    import TextView from "../../Forms/FormComponents/Form UIComponents/TextView.svelte";
-    import { taskDetails,isOpen,tableData} from "$lib/TaskDetails/addtaskdatahandling.js";
-
-
-
-
-    import { isEditTaskPopUpOpen} from "$lib/TaskDetails/openeditTaskPopUp.js";
-
-    import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
-	import Pending from "../TaskStatus/Pending.svelte";
-	import Applicable from "../TaskStatus/Applicable.svelte";
+  import TextAreaView from "../../Forms/FormComponents/Form UIComponents/TextAreaView.svelte";
+  import TextView from "../../Forms/FormComponents/Form UIComponents/TextView.svelte";
+  import {tableData,assignee} from "$lib/TaskDetails/addtaskdatahandling.js";
+  import {currentrow,isEditTaskPopUpOpen} from "$lib/TaskDetails/editingtask.js";
+  import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
+import TaskStatusDropDown from "../DropDownMenus/TaskStatusDropDown.svelte";
 	import NotApplicable from "../TaskStatus/NotApplicable.svelte";
-	import Yes from "../TaskStatus/Yes.svelte";
-	import No from "../TaskStatus/No.svelte";
-	import InProgress from "../TaskStatus/InProgress.svelte";
-	import Otherstatus from "../TaskStatus/Otherstatus.svelte";
-	import TaskStatusDropDown from "../DropDownMenus/TaskStatusDropDown.svelte";
-  // import { getFilteredWords, insertWord, insertMultipleWords,createTrie } from '$lib/Logic/autoSuggestion.js';
-  // import { writable } from 'svelte/store';
-  // const filteredWords = writable([]);
-  // let searchQuery = "";
-  // let selectedPerson = "";
+import {gettingDictionaryReady,result,search,query} from '$lib/Logic/autoSuggestion.js';
 
 
-  // const dictionary = [
-  //   "dhairya", "dhyey", "aman", "amiab", "rhekha", "jaya",
-  //   "sushma", "naman", "pankaj", "dharmesh", "dhavan"
-  // ];
-  // const trie = createTrie(dictionary);
+let taskname=$tableData[$currentrow][1];
+let taskdesc=$assignee[$currentrow-1][1];
 
-  // function filterWords() {
-  //   const results = trie.search(searchQuery);
-  //   filteredWords.set(results);
+
+function searchresult() {
+  const dictionary = [
+      "Dhairya", "Dhyey", "Aman", "Amitab", "Rekha", "Jaya",
+      "Sushma", "Naman", "Pankaj", "Dharmesh", "Dhavan"
+    ];
+    gettingDictionaryReady(dictionary);
+  }
+
+  searchresult(); // Load dictionary on component mount
+
+  let selectedPerson = "";
+
+  function selectPerson(name) {
+    selectedPerson = name;
+    $tableData[$currentrow][1]=name;
+    query.set(name); 
+    result.set([]);  
+  }
+ 
+
+  function toggleSystemPanel() {
+    $isEditTaskPopUpOpen = false; 
+    console.log("System panel closed");
+    console.log($isEditTaskPopUpOpen);
+  }
+
+  // function saveallUpdates() {
+  //   console.log("Save all details button clicked");
+  //   console.log("Task name: "+taskname);
+  //   console.log("Task desc: "+taskdesc);
+  //   console.log("Status Option: "+selectedPerson);
+
+  //   tableData.update(currentData => {
+  //     console.table(currentData);
+  //       return currentData.map((row, index) => {
+  //           if (index === currentrow) {
+  //               let newRow = [...row]; // Copy row to prevent mutation
+  //               newRow[1] = taskname;  // Update task name
+  //               return newRow;
+  //           }
+  //           console.table(updatedData);
+  //           return row;
+  //       });
+        
+  //   });
+  //   assignee.update(a => {
+  //       a[$currentrow] = [selectedPerson,taskdesc];
+  //       return [...a]; 
+  //   });
+  //   toggleSystemPanel();
   // }
 
-  // function selectPerson(name) {
-  //   selectedPerson = name;
-  //   searchQuery = name; // Update the input field with the selected name
-  //   filteredWords.set([]); // Clear the dropdown menu
-  // }
+  function saveallUpdates() {
+    console.log("Save all details button clicked");
+    console.log("Task name: " + taskname);
+    console.log("Task desc: " + taskdesc);
+    console.log("Status Option: " + selectedPerson);
 
+    // console.log("Before update - tableData:");
+    // console.table($tableData); // Log tableData before updating
 
+    tableData.update(currentData => {
+        // console.log("Inside update function - Before modification:");
+        // console.table(currentData); // Log before modifying
 
-  // import { writable } from 'svelte/store';
-
-  // export const filteredWords = writable([]);
-  // let selectedPerson = ""; // Store the selected person's name
-
-  // const dictionary = [
-  //   "dhairya", "dhyey", "aman", "amiab", "rhekha", "jaya",
-  //   "sushma", "naman", "pankaj", "dharmesh", "dhavan"
-  // ];
-
-  // class TrieNode {
-  //   constructor() {
-  //     this.children = {};
-  //     this.isEnd = false;
-  //   }
-  // }
-
-  // class Trie {
-  //   constructor() {
-  //     this.root = new TrieNode();
-  //   }
-
-  //   insert(word) {
-  //     let node = this.root;
-  //     for (const char of word) {
-  //       if (!node.children[char]) {
-  //         node.children[char] = new TrieNode();
-  //       }
-  //       node = node.children[char];
-  //     }
-  //     node.isEnd = true;
-  //   }
-
-  //   dfs(node, prefix, results) {
-  //     if (node.isEnd) results.push(prefix);
-
-  //     for (const char in node.children) {
-  //       this.dfs(node.children[char], prefix + char, results);
-  //     }
-  //   }
-
-  //   search(prefix) {
-  //     let node = this.root;
-  //     for (const char of prefix) {
-  //       if (!node.children[char]) return [];
-  //       node = node.children[char];
-  //     }
-  //     const results = [];
-  //     this.dfs(node, prefix, results);
-  //     return results;
-  //   }
-  // }
-
-  // const trie = new Trie();
-  // dictionary.forEach(word => trie.insert(word));
-
-  // let searchQuery = "";
-
-  // function filterWords() {
-  //   const results = trie.search(searchQuery);
-  //   filteredWords.set(results);
-  // }
-
-  // function selectPerson(name) {
-  //   selectedPerson = name;
-  //   searchQuery = name; // Update the input field with the selected name
-  //   filteredWords.set([]); // Clear the dropdown menu
-  // }
-  
-
-
-    let Statuswidget=NotApplicable;
-
-    function getRelevantWidget(){
-        if($taskDetails.statusoptions === "yes"){
-            // Statuswidget= Yes;
-            Statuswidget=TaskStatusDropDown;
-        } else if($taskDetails.statusoptions === "no"){
-            Statuswidget=   TaskStatusDropDown;
-        } else if($taskDetails.statusoptions === "notapplicable"){
-            Statuswidget= TaskStatusDropDown;
-        }
-        else if($taskDetails.statusoptions === "inprogress"){
-            Statuswidget= TaskStatusDropDown;
-        }
-        else if($taskDetails.statusoptions === "Otherstatus"){
-            Statuswidget= TaskStatusDropDown;
-        } else {
-            Statuswidget= TaskStatusDropDown;
-        }
-    }
-    
-  
-    function toggleSystemPanel() {
-      $isEditTaskPopUpOpen = false; 
-      console.log("System panel closed");
-      console.log($isEditTaskPopUpOpen);
-    }
-  
-    function saveallUpdates() {
-        getRelevantWidget();
-      console.log("Save all details button clicked");
-      console.log("Task name: "+$taskDetails.taskname);
-      console.log("Task desc: "+$taskDetails.taskdesc);
-      console.log("Status Option: "+$taskDetails.statusoptions);
-
-      const newRow = [
-            $tableData.length, // SL NO.
-            $taskDetails.taskname, // Task Name
-            Statuswidget // Status (depending on taskDetails.statusoptions)
-        ];
-        const numberOfColumns = $tableData[0].length;
-        for (let i = newRow.length; i < numberOfColumns;i++) {
-            newRow.push(TaskStatusDropDown); 
-        }
-        tableData.update(data => {
-            data.push(newRow);
-            return data;
+        const updatedData = currentData.map((row, index) => {
+            if (index === $currentrow) {
+                console.log(`Updating row ${index}, setting taskname to:`, taskname);
+                return [row[0], taskname, ...row.slice(2)]; // Correctly replace only the 2nd column (index 1)
+            }
+            return row;
         });
 
-      toggleSystemPanel();
-    }
-  
-    const taskoptions = [
-      { value: "dhiraj", label: "Dhirya" },
-      { value: "jatin", label: "Jatin" },
-      { value: "rohan", label: "Rohan" },
-      { value: "mohan", label: "Mohan" },
-      { value: "sohan", label: "Rohan" },
-    ];
-  </script>
-  
+        // console.log("After modification - tableData:");
+        // console.table(updatedData); // Log the modified tableData
 
-  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <!-- Modal Content -->
-    <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
-      <!-- Header -->
-      <div class="flex flex-row justify-between items-center">
-        <p class="text-2xl font-semibold text-gray-700">Edit Task</p>
-        <button
-          type="button"
-          class="py-2 px-3 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2"
-          on:click={toggleSystemPanel}
-        >
-          <img src="/close.png" alt="close icon" class="w-5 h-5" />
-        </button>
-      </div>
-  
-      <!-- Divider -->
-      <div class="w-full border-b-2 border-gray-300 mt-4 mb-4"></div>
-  
-      <!-- Form Content -->
-      <div class="space-y-4 ">
-        <div class="flex flex-row gap-4">
-            <div class="flex-1">
-              <TextView
-                id="billto"
-                label="Task Name"
-                name="taskname"
-                placeholder="Enter task name"
-                inputtype="text"
-                required={true}
-                bind:value={$taskDetails.taskname}
-              />
-            </div>
-            
-            <div class="flex-1">
-              <TextAreaView
-                id="description"
-                label="Description"
-                name="description"
-                placeholder="Enter description (optional)"
-                bind:value={$taskDetails.taskdesc}
-              />
-            </div>
-          </div>
-        
-  
-        <!-- <div>
-          <label for="dropdown" class="block text-sm font-medium text-gray-600">
-            Assign to
-            <span class="text-red-500">*</span>
-          </label>
-          <select
-            id="dropdown"
-            bind:value={$taskDetails.statusoptions}
-            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            required
-          >
-            <option value="" disabled selected>Select Status</option>
-            {#each taskoptions as option}
-              <option value={option.value}>{option.label}</option>
-            {/each}
-          </select>
-        </div> -->
+        return updatedData;
+    });
 
-        <!-- Here there was a pop up which I have removed as far -->
+    // Log Assignee before updating
+    console.log("Before update - assignee:");
+    console.table($assignee);
 
-        
+    assignee.update(a => {
+        a[$currentrow-1] = [selectedPerson,taskdesc];
+        console.log("After update - assignee:");
+        console.table($assignee);
+        return [...a]; 
+    });
+
+    toggleSystemPanel();
+}
+
+ 
+</script>
 
 
-
-      </div>
-
-
-
-
-  
-      <!-- Footer -->
-      <div class="flex justify-end mt-6">
-        <ButtonComponent
-          label="Save All Updates"
-          bgcolor="bg-blue-700"
-          textcolor="text-white"
-          bordercolor=""
-          focusringcolor="focus:ring-blue-300"
-          hoverbg=""
-          rounded="rounded-full"
-          laggingimg="/addtaskrightarrow.png"
-          laggingalt="Save and Updates"
-          type="button"
-          onClick={saveallUpdates}
-        />
-      </div>
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+  <!-- Modal Content -->
+  <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+    <!-- Header -->
+    <div class="flex flex-row justify-between items-center">
+      <p class="text-2xl font-semibold text-gray-700">Edit Task</p>
+      <button
+        type="button"
+        class="py-2 px-3 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2"
+        on:click={toggleSystemPanel}
+      >
+        <img src="/close.png" alt="close icon" class="w-5 h-5" />
+      </button>
     </div>
-  </div>
 
-  
+    <!-- Divider -->
+    <div class="w-full border-b-2 border-gray-300 mt-4 mb-4"></div>
+
+    <!-- Form Content -->
+    <div class="space-y-4 ">
+      <div class="flex flex-row gap-4">
+          <div class="flex-1">
+            <TextView
+              id="taskname"
+              label="Task Name"
+              name="taskname"
+              placeholder="Enter task name"
+              inputtype="text"
+              required={true}
+              bind:value={taskname}
+            />
+          </div>
+          
+          <div class="flex-1">
+            <TextAreaView
+              id="description"
+              label="Description"
+              name="description"
+              placeholder="Enter description (optional)"
+              bind:value={taskdesc}
+            />
+          </div>
+        </div>
+      <!-- Here there was a pop up which I have removed as far -->
+      <div class="flex items-start space-x-4 p-4">
+        <!-- "Assign to" Label -->
+        <div class="flex-shrink-0 font-semibold p-2 rounded-lg">
+          <span>Assign to</span>
+        </div>
+      
+        <!-- Filter Block -->
+        <div class="relative mb-4">
+          <input
+            type="text"
+            class="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Start typing to search..."
+            bind:value={$query}  
+            
+          />
+      
+          <!-- Dropdown Menu -->
+          {#if $result.length > 0}
+            <ul class="absolute left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg mt-2 z-10">
+              {#each $result as word}
+                <li>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-blue-100 focus:outline-none"
+                    type="button"
+                    on:click={() => selectPerson(word)}
+                    on:keydown={(e) => { if (e.key === 'Enter') saveallUpdates }}
+                  >
+                    {word}
+                  </button>
+                </li>
+              {/each}
+            </ul>
+          {/if}
+        </div>
+      </div>
+      
+
+      
+
+
+
+    </div>
+
+
+
+
+
+    <!-- Footer -->
+    <div class="flex justify-end mt-6">
+      <ButtonComponent
+        label="Save All Updates"
+        bgcolor="bg-blue-700"
+        textcolor="text-white"
+        bordercolor=""
+        focusringcolor="focus:ring-blue-300"
+        hoverbg=""
+        rounded="rounded-full"
+        laggingimg="/addtaskrightarrow.png"
+        laggingalt="Save and Updates"
+        type="button"
+        onClick={saveallUpdates}
+      />
+    </div>
+
+    <div class="flex justify-end mt-6">
+      <ButtonComponent
+        label="button"
+        bgcolor="bg-blue-700"
+        textcolor="text-white"
+        bordercolor=""
+        focusringcolor="focus:ring-blue-300"
+        hoverbg=""
+        rounded="rounded-full"
+        laggingimg="/addtaskrightarrow.png"
+        laggingalt="Save and Updates"
+        type="button"
+        onClick={searchresult}
+      />
+    </div>
+
+  </div>
+</div>
+

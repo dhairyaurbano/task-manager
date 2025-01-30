@@ -9,8 +9,11 @@
       $isDeleteStatusPopUpOpen = false; 
       console.log("Delete PopUp panel Closed");
       console.log($isDeleteStatusPopUpOpen);
-    }
-    function DeleteColumn(colidx) {
+  }
+
+
+
+  function DeleteColumn(colidx) {
   $isDeleteStatusPopUpOpen = true;
 
   console.log("Delete Column " + colidx);
@@ -23,6 +26,9 @@
     });
     return [...currentData]; 
   });
+
+
+
 
   $isDeleteStatusPopUpOpen = false;
 }

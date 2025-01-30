@@ -1,26 +1,38 @@
 <script>
-
+    import { tableData,assignee } from '$lib/TaskDetails/addtaskdatahandling.js';
 	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
     import {isOpen} from '../../../lib/TaskDetails/addtaskdatahandling.js';
-	import AddTask from "../UI Components/PopUp/AddTask.svelte";
 	import SystemTabTable from "../UI Components/Tables/SystemTabTable.svelte";
     import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	// import DeletingTaskPopup from "../UI Components/PopUp/DeletingTaskPopup.svelte";
 
     // $isOpen=false;
     function addingTask(){
-        console.log("Task added");
-        $isOpen=true;
-        console.log("Open status is "+ $isOpen);
+        const newRow = [
+            $tableData.length, // SL NO.
+            "New Task", // Task Name
+            Statuswidget // Status (depending on taskDetails.statusoptions)
+        ];
+        const numberOfColumns = $tableData[0].length;
+        for (let i = newRow.length; i < numberOfColumns;i++) {
+            newRow.push(TaskStatusDropDown); 
+        }
+        tableData.update(data => {
+            data.push(newRow);
+            return data;
+        });
+
+        assignee.update(data => {
+            data.push(["Unassigned",""]);
+            return data;
+        });
     }
     function importtemplate(){
         console.log("Template imported");
     }
 
 </script>
-{#if $isOpen}
-<AddTask/>
-{/if}
+
 
 
 <div class="flex flex-col ">

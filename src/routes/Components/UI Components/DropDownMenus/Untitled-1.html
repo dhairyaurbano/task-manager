@@ -1,7 +1,6 @@
 <script>
 	import ButtonComponent from "../FormComponents/ButtonComponent.svelte";
 	import InputText from "../FormComponents/InputText.svelte";
-	import AddTask from "./AddTask/AddTask.svelte";
   import { isPopupVisible,statusCount,tableData } from "$lib/systemformdata";
 	import Pending from "./Task Status/Pending.svelte";
 	import Tableaddbutton from "../FormComponents/Tableaddbutton.svelte";
@@ -60,7 +59,6 @@ function addColumn() {
 </script>
 {#if $isPopupVisible}
 
-<AddTask/>
 {/if}
 <div class="flex  bg-blue-100 w-auto p-2 ">
 

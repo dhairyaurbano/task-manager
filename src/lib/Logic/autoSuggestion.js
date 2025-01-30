@@ -1,75 +1,33 @@
-// trie.js
+import { writable } from 'svelte/store';
 
-class TrieNode {
-    constructor() {
-      this.children = {};
-      this.isEnd = false;
-    }
-  }
-  
-  class Trie {
-    constructor() {
-      this.root = new TrieNode();
-    }
-  
-    insert(word) {
-      let node = this.root;
-      for (const char of word) {
-        if (!node.children[char]) {
-          node.children[char] = new TrieNode();
-        }
-        node = node.children[char];
-      }
-      node.isEnd = true;
-    }
-  
-    dfs(node, prefix, results) {
-      if (node.isEnd) results.push(prefix);
-  
-      for (const char in node.children) {
-        this.dfs(node.children[char], prefix + char, results);
-      }
-    }
-  
-    search(prefix) {
-      let node = this.root;
-      for (const char of prefix) {
-        if (!node.children[char]) return [];
-        node = node.children[char];
-      }
-      const results = [];
-      this.dfs(node, prefix, results);
-      return results;
-    }
-  }
-  
-//   const trie = new Trie();
-  
-//   const defaultDictionary = [
-//     "dhairya", "dhyey", "aman", "amiab", "rhekha", "jaya",
-//     "sushma", "naman", "pankaj", "dharmesh", "dhavan"
-//   ];
-  
-//   defaultDictionary.forEach(word => trie.insert(word));
-  
-//   // Helper functions
-//   export function insertWord(word) {
-//     trie.insert(word);
-//   }
-  
-//   export function insertMultipleWords(words) {
-//     words.forEach(word => trie.insert(word));
-//   }
-  
-//   export function getFilteredWords(query) {
-//     if (!query) return [];
-//     return trie.search(query.toLowerCase());
-//   }
-  
-export function createTrie(dictionary = []) {
-    const trie = new Trie();
-    dictionary.forEach(word => trie.insert(word));
-    console.log(word+" added sucessfully");
-    return trie;
+export let result = writable([]);  // Stores search results
+export let query = writable("");   // Stores input query
+let wordMap = new Map();           // Internal storage for dictionary
+
+export function gettingDictionaryReady(dictionary = []) {
+  wordMap.clear();
+  dictionary.forEach(word => {
+    wordMap.set(word, true);
+  });
+}
+
+// Auto-search when query changes
+query.subscribe(value => {
+  search(value);
+});
+
+export function search(prefixWord) {
+  if (!prefixWord.trim()) {
+    result.set([]);  // Empty input, clear results
+    return;
   }
 
+  let matches = [];
+  for (let [word, _] of wordMap) {
+    if (word.toLowerCase().startsWith(prefixWord.toLowerCase())) {
+      matches.push(word);
+    }
+  }
+
+  result.set(matches);
+}

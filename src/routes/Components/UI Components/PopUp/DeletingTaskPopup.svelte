@@ -2,7 +2,7 @@
 
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
   import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
-  import { tableData } from "$lib/TaskDetails/addtaskdatahandling.js";
+  import { tableData,assignee } from "$lib/TaskDetails/addtaskdatahandling.js";
   import { deletingrowidx } from "$lib/TaskDetails/deletingtask.js";
 
   // export let rowidx=1;
@@ -22,7 +22,13 @@
             console.table(updatedData);
             return updatedData; 
         });
-
+        assignee.update(data => {
+            console.table(data);
+            const updatedData = [...data]; 
+            updatedData.splice($deletingrowidx-1, 1);
+            console.table(updatedData);
+            return updatedData; 
+        });
         isDeletePopUpOpen.set(false); 
   }
 
