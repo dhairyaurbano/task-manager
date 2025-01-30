@@ -1,9 +1,8 @@
 <script>
 
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
-  import {isDeleteStatusPopUpOpen} from '../../../../lib/TaskDetails/deletingstatus.js';
+  import {isDeleteStatusPopUpOpen,currDeletingColumnIdx} from '$lib/TaskDetails/deletingstatus.js';
   import {tableData} from "$lib/TaskDetails/addtaskdatahandling.js";
-  export let colidx=$tableData[0].length-1;
 
   function ClosePanel() {
       $isDeleteStatusPopUpOpen = false; 
@@ -13,24 +12,29 @@
 
 
 
-  function DeleteColumn(colidx) {
-  $isDeleteStatusPopUpOpen = true;
+  function DeleteColumn() {
+    const columnIdx = $currDeletingColumnIdx;
 
-  console.log("Delete Column " + colidx);
+    console.log("Delete Column at index:", columnIdx);
 
-  tableData.update(currentData => {
-  
-    currentData = currentData.map(row => {
-      row.splice(colidx, 1); 
-      return row; 
+    tableData.update(currentData => {
+        console.log("Before Deleting Column:");
+        console.table(currentData);
+
+        const updatedData = currentData.map(row => {
+            if (columnIdx >= 0 && columnIdx < row.length) { // Ensure valid index
+                row = [...row.slice(0, columnIdx), ...row.slice(columnIdx + 1)];
+            }
+            return row;
+        });
+
+        console.log("After Deleting Column:");
+        console.table(updatedData);
+
+        return updatedData;
     });
-    return [...currentData]; 
-  });
 
-
-
-
-  $isDeleteStatusPopUpOpen = false;
+    isDeleteStatusPopUpOpen.set(false);
 }
 
 </script>
@@ -71,7 +75,7 @@
                 textcolor="text-white" 
                 bordercolor="border-red-500" 
                 rounded="rounded-xl"
-                onClick={()=>DeleteColumn(colidx)} 
+                onClick={()=>DeleteColumn()} 
               />
             </div>
           </div>

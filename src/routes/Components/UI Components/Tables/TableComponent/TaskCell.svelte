@@ -23,7 +23,7 @@
             {#if assignedTo !== "Not assigned"}
               Assigned to {assignedTo}
             {:else}
-              Unassigned
+              {assignedTo}
             {/if}
           </span>
           

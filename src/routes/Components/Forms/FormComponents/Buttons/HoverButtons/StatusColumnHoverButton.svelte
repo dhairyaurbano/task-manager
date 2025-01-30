@@ -1,22 +1,20 @@
 <script>
-    import {isDeleteStatusPopUpOpen} from '$lib/TaskDetails/deletingstatus.js';
+    import {isDeleteStatusPopUpOpen,currDeletingColumnIdx} from '$lib/TaskDetails/deletingstatus.js';
     import {editable} from "$lib/TaskDetails/testingeditablefunctionality.js";
-      import DeletingTaskPopup from '../../../../UI Components/PopUp/DeletingTaskPopup.svelte';
 	import DeletingStatusPopup from '../../../../UI Components/PopUp/DeletingStatusPopup.svelte';
+export let row=0
+
+export let colIdx=2;
       function handleButtonClick(row){
-          // Perform your desired actions here
           editable.set(true);
-          
-      }
-      export let row=0;
-      // $isDeletePopUpOpen=false;
-  
-      function openDeletePopUp(row){
-        console.log(`Row ${row} was clicked`);
+      }  
+      function openDeletePopUp(colIdx){
+        currDeletingColumnIdx.set(colIdx)
+        console.log(`Column ${$currDeletingColumnIdx} was clicked`);
         
   
         $isDeleteStatusPopUpOpen=true;
-        console.log("Delete panel opened");
+        console.log("Delete status panel opened");
         console.log("Variable status: " + $isDeleteStatusPopUpOpen);
     }
   
@@ -39,7 +37,7 @@
                       <button 
                       type="button"
                       class="bg-white   px-1 py-1 rounded hover:bg-gray-200"
-                      on:click={()=>openDeletePopUp(row)}
+                      on:click={()=>openDeletePopUp(colIdx)}
                     >
                     <img src="/deleteicon.png" alt="delete icon" class="w-2 h-2" />
                     </button>

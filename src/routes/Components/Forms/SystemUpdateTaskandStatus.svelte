@@ -4,6 +4,7 @@
     import {isOpen} from '../../../lib/TaskDetails/addtaskdatahandling.js';
 	import SystemTabTable from "../UI Components/Tables/SystemTabTable.svelte";
     import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
+	import TaskStatusDropDown from '../UI Components/DropDownMenus/TaskStatusDropDown.svelte';
 	// import DeletingTaskPopup from "../UI Components/PopUp/DeletingTaskPopup.svelte";
 
     // $isOpen=false;
@@ -11,7 +12,7 @@
         const newRow = [
             $tableData.length, // SL NO.
             "New Task", // Task Name
-            Statuswidget // Status (depending on taskDetails.statusoptions)
+            TaskStatusDropDown // Status (depending on taskDetails.statusoptions)
         ];
         const numberOfColumns = $tableData[0].length;
         for (let i = newRow.length; i < numberOfColumns;i++) {
@@ -23,7 +24,7 @@
         });
 
         assignee.update(data => {
-            data.push(["Unassigned",""]);
+            data.push(["Not assigned",""]);
             return data;
         });
     }

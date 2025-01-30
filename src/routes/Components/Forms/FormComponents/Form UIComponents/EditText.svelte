@@ -4,6 +4,7 @@
 
     export let value = '';
     // export let edit=true;
+    export let columnIdx=2;
     export let placeholder = 'Type here...';
     export let onInput = () => {};
     function handleInput(event) {
@@ -37,7 +38,7 @@
 
    {#if hoverbuttonvisible}
    <div class="absolute right-1 top-1/2 transform -translate-y-1/2">
-     <StatusColumnHoverButton />
+     <StatusColumnHoverButton colIdx={columnIdx}/>
    </div>
  {/if}
 

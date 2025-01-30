@@ -65,7 +65,7 @@ function addingTask(){
         });
 
         assignee.update(data => {
-            data.push(["Unassigned",""]);
+            data.push(["Not assigned",""]);
             return data;
         });
 }
@@ -97,7 +97,7 @@ function addingTask(){
               <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative ' : (index===0)?'min-w-16':'min-w-64'} ">
                 {#if index >= 2}
                 <div class="">
-                  <StatusCell textValue={header} />
+                  <StatusCell textValue={header} colIdx={index}/>
                 </div>
                 {:else}
                 <div class="">

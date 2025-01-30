@@ -1,8 +1,8 @@
 <script>
     import { onMount } from "svelte";
   
-    let isOpen = false; // Controls dropdown visibility
-    let selectedOption = null; // Holds the selected option
+    let isOpen = false; 
+    let selectedOption = null; 
     let dropdowniconVisible = false;
     let options = [
       {
