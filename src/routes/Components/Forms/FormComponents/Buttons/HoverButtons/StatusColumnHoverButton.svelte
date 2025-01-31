@@ -23,11 +23,11 @@ export let colIdx=2;
   {#if $isDeleteStatusPopUpOpen}
   <DeletingStatusPopup/>
   {/if}
-  <div class=" inline-block">
+  <div class=" inline-block z-51">
                   <div class="flex mb-2">
                       <button 
                       type="button"
-                      class="bg-white  px-1 py-1 rounded hover:bg-gray-200"
+                      class="  px-1 py-1 rounded hover:bg-gray-200"
                       on:click={() => handleButtonClick(row)}
                     >
                     <img src="/editicon.png" alt="edit icon" class="w-2 h-2" />
@@ -36,7 +36,7 @@ export let colIdx=2;
                   <div class="flex">
                       <button 
                       type="button"
-                      class="bg-white   px-1 py-1 rounded hover:bg-gray-200"
+                      class="px-1 py-1 rounded hover:bg-gray-200"
                       on:click={()=>openDeletePopUp(colIdx)}
                     >
                     <img src="/deleteicon.png" alt="delete icon" class="w-2 h-2" />

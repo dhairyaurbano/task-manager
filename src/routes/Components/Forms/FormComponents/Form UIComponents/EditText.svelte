@@ -21,7 +21,7 @@
   // hoverbuttonvisible.set(false);
 
   </script>
-  <div class="relative"
+  <div class="relative "
   on:mouseenter={() => hoverbuttonvisible=true} 
   on:mouseleave={() => { hoverbuttonvisible=false; editable.set(false); }}
 >

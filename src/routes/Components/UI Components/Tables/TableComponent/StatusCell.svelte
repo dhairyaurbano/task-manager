@@ -10,7 +10,7 @@
     console.log('Current Input:', textValue);
   }
 </script>
-<div class="w-44">
+<div class="w-28 ">
     <EditText
     bind:value={textValue} 
     columnIdx={colIdx}

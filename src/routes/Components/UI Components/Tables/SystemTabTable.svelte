@@ -17,13 +17,13 @@
 
   // let Statuswidget=TaskStatusDropDown;
     $tableData = [
-      ['SL NO.', 'Task', 'Status 1','Status 2'], 
-      [1, 'New Task 1', "Pending","Pending"],
-      [2, 'New Task 2', "Pending","Pending"],
-      [3, 'New Task 3', "Pending","Yes"],
-      [4, 'New Task 4', "Pending","Pending"],
-      [5, 'New Task 5', "In Progress","Pending"],
-      [6, 'New Task 6', "Pending","Pending"],
+      ['SL NO.', 'Task', 'Status 1'], 
+      [1, 'New Task 1', "Pending"],
+      [2, 'New Task 2', "Pending"],
+      [3, 'New Task 3', "Pending"],
+      [4, 'New Task 4', "Pending"],
+      [5, 'New Task 5', "In Progress"],
+      [6, 'New Task 6', "Pending"],
 
     ];
     $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
@@ -91,17 +91,17 @@ function addingTask(){
 <SelectTemplatePopUp/>
 {/if}
 
-<div class="max-w-full">
-  <div class="mx-1 my-2 rounded-lg border-2 border-gray-300 overflow-x-auto overflow-y-visible max-w-xl">
+<div class="max-w-lg">
+  <div class="mx-1 my-2 rounded-lg border-2 border-gray-300  max-w-xl p-1 bg-white">
     <div class="overflow-x-scroll overflow-y-visible  ">
       <table class="table-auto border-collapse bg-white">
         <thead class="relative ">
-          <tr class="border-b overflow-x-visible">
+          <tr class="border-b ">
             {#each $tableData[0] as header, index}
             <th class={`px-4 py-2 flex-1  `}>
-              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative ' : (index===0)?'min-w-16':'w-28 '} ">
+              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-48 relative bg-red-100' : (index===0)?'min-w-16':'w-28 '} ">
                 {#if index >= 2}
-                <div class="bg-red-400 ">
+                <div class=" ">
                   <StatusCell textValue={header} colIdx={index}/>
                 </div>
                 {:else}
