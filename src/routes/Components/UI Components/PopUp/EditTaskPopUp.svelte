@@ -154,9 +154,9 @@ function searchresult() {
           </div>
         </div>
       <!-- Here there was a pop up which I have removed as far -->
-      <div class="flex items-start space-x-4 p-4">
+      <div class="flex flex-row items-center space-x-4 ">
         <!-- "Assign to" Label -->
-        <div class="flex-shrink-0 font-semibold p-2 rounded-lg">
+        <div class="flex flex-shrink-0 font-semibold text-center rounded-lg">
           <span>Assign to</span>
         </div>
       
@@ -165,7 +165,7 @@ function searchresult() {
           <input
             type="text"
             class="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Start typing to search..."
+            placeholder="Type Assignee"
             bind:value={$query}  
             
           />
@@ -215,22 +215,6 @@ function searchresult() {
         laggingalt="Save and Updates"
         type="button"
         onClick={saveallUpdates}
-      />
-    </div>
-
-    <div class="flex justify-end mt-6">
-      <ButtonComponent
-        label="button"
-        bgcolor="bg-blue-700"
-        textcolor="text-white"
-        bordercolor=""
-        focusringcolor="focus:ring-blue-300"
-        hoverbg=""
-        rounded="rounded-full"
-        laggingimg="/addtaskrightarrow.png"
-        laggingalt="Save and Updates"
-        type="button"
-        onClick={searchresult}
       />
     </div>
 

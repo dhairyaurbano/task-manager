@@ -5,6 +5,8 @@
 	import SystemTabTable from "../UI Components/Tables/SystemTabTable.svelte";
     import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import TaskStatusDropDown from '../UI Components/DropDownMenus/TaskStatusDropDown.svelte';
+    import { templatePopUpOpen } from "$lib/SystemTab/templatePopUp.js";
+
 	// import DeletingTaskPopup from "../UI Components/PopUp/DeletingTaskPopup.svelte";
 
     // $isOpen=false;
@@ -30,6 +32,7 @@
     }
     function importtemplate(){
         console.log("Template imported");
+        $templatePopUpOpen=true;
     }
 
 </script>

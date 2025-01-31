@@ -1,6 +1,8 @@
 <script>
 	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
     import { tableData,isOpen } from '$lib/TaskDetails/addtaskdatahandling.js';
+    import { templatePopUpOpen} from "$lib/SystemTab/templatePopUp.js";
+
 
 	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
     function goback(){
@@ -18,6 +20,7 @@
   }
 
     $isOpen=false;
+    templatePopUpOpen.set(false);
     // $isDeletePopUpOpen=false;
   const systemnameoptions = [
         { value: "system1", label: "System 1" },
@@ -99,24 +102,6 @@
      onClick={savedetials}
      />
        </div>
-
-
-       <div class="mx-2"> 
-        <!-- Save Button -->
-   <ButtonComponent
-  label="ShowTable"
-  bgcolor="bg-black"
-  textcolor="text-white"
-  bordercolor="border-sky-500"
-  focusringcolor="focus:ring-sky-400"
-  hoverbg="hover:bg-sky-50"
-  rounded="rounded-full"
-  laggingimg=""
-  laggingalt=""
-  type="button"
-  onClick={showtable}
-  />
-    </div>
        
    </div>
 

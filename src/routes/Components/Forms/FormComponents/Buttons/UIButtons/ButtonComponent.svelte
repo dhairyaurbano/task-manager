@@ -17,7 +17,7 @@
 <div class="text-center">
     <button
         type={type}
-        class={`${bgcolor} ${textcolor} ${bordercolor} ${hoverbg} ${focusringcolor} ${rounded} py-2 px-3 flex items-center justify-center gap-2 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2`}
+        class={`${bgcolor} ${textcolor} ${hoverbg} ${focusringcolor} ${rounded} py-2 px-3 flex items-center justify-center gap-2 border border-1  ${bordercolor} focus:outline-none focus:ring-2 focus:ring-offset-2`}
         on:click={onClick}
     >
         {#if leadingimg !== ""}
