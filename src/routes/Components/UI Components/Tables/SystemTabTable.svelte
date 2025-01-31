@@ -90,75 +90,77 @@ function addingTask(){
 {#if $templatePopUpOpen}
 <SelectTemplatePopUp/>
 {/if}
-
-<div class="max-w-lg">
-  <div class="mx-1 my-2 rounded-lg border-2 border-gray-300  max-w-xl p-1 bg-white">
-    <div class="overflow-x-scroll overflow-y-visible  ">
-      <table class="table-auto border-collapse bg-white">
-        <thead class="relative ">
-          <tr class="border-b ">
-            {#each $tableData[0] as header, index}
-            <th class={`px-4 py-2 flex-1  `}>
-              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-48 relative bg-red-100' : (index===0)?'min-w-16':'w-28 '} ">
-                {#if index >= 2}
-                <div class=" ">
-                  <StatusCell textValue={header} colIdx={index}/>
+<div class="mx-auto  w-full">
+  <div class="threshold1:max-w-lg threshold2:max-w-xl threshold3:max-w-2xl threshold4:max-w-3xl threshold5:max-w-4xl threshold6:max-w-5xl threshold7: max-w-6xl threshold8:max-w-7xl  mx-auto"> 
+    <div class="mx-auto my-2 rounded-lg border-2 border-gray-300  max-w-full p-1 bg-white">
+      <div class="overflow-x-scroll overflow-y-visible  ">
+        <table class="table-auto border-collapse bg-white">
+          <thead class="relative ">
+            <tr class="border-b ">
+              {#each $tableData[0] as header, index}
+              <th class={`px-2 py-2 flex-1  `}>
+                <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-48 relative ' : (index===0)?'min-w-16':'w-28 '} ">
+                  {#if index >= 2}
+                  <div class=" ">
+                    <StatusCell textValue={header} colIdx={index}/>
+                  </div>
+                  {:else}
+                  <div >
+                    <span class="text-center text-base">{header}</span>
+  
+                  </div>
+                  {/if}
+    
+                  {#if header === 'Task'}
+                     <div class=" absolute right-0 ">
+                      <Tableaddbutton onClick={addingTask} />
+  
+                     </div>
+                  {/if}
                 </div>
-                {:else}
-                <div >
-                  <span class="text-center text-base">{header}</span>
-
-                </div>
+    
+                {#if index === 0} 
+                  <div class="absolute -right-2 z-70 transform -translate-y-1/2 top-1/2">
+                    <Tableaddbutton onClick={addColumn} />
+                  </div>
                 {/if}
-  
-                {#if header === 'Task'}
-                   <div class=" absolute right-0 ">
-                    <Tableaddbutton onClick={addingTask} />
-
-                   </div>
-                {/if}
+              </th>
+              {/each}
+            </tr>
+          </thead>
+          
+          <tbody>
+            {#each $tableData.slice(1) as row,rowIndex}
+            <tr class="border-b">
+              {#each row as cell, index}
+              <td class={`px-4 py-2 text-center relative ${columnStyles[index]} ${index === 1 ? 'group' : ''}`}>
+                <div class="flex justify-center items-center h-full">
+                  {#if index == 0}
+              <div class="flex-1">
+                <span>{rowIndex + 1}</span>
               </div>
-  
-              {#if index === 0} 
-                <div class="absolute -right-2 z-70 transform -translate-y-1/2 top-1/2">
-                  <Tableaddbutton onClick={addColumn} />
+            {:else if index === 1}
+              <div>
+                <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} />
+              </div>
+            {:else}
+              <TaskStatusDropDown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} />
+            {/if}
                 </div>
-              {/if}
-            </th>
+    
+                
+              </td>
+              {/each}
+            </tr>
             {/each}
-          </tr>
-        </thead>
-        
-        <tbody>
-          {#each $tableData.slice(1) as row,rowIndex}
-          <tr class="border-b">
-            {#each row as cell, index}
-            <td class={`px-4 py-2 text-center relative ${columnStyles[index]} ${index === 1 ? 'group' : ''}`}>
-              <div class="flex justify-center items-center h-full">
-                {#if index == 0}
-            <div class="flex-1">
-              <span>{rowIndex + 1}</span>
-            </div>
-          {:else if index === 1}
-            <div>
-              <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} />
-            </div>
-          {:else}
-            <TaskStatusDropDown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} />
-          {/if}
-              </div>
-  
-              
-            </td>
-            {/each}
-          </tr>
-          {/each}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
+  
   </div>
-
 </div>
+
 
   
   
