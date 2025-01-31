@@ -24,9 +24,13 @@
       [4, 'New Task 4', "Pending","Pending","Pending"],
       [5, 'New Task 5', "In Progress","Pending","Pending"],
       [6, 'New Task 6', "Pending","Pending","Pending"],
-
+      [7, 'New Task 7', "Pending","Pending","No"],
+      [8, 'New Task 8', "Pending","Pending","Pending"],
+      [9, 'New Task 9', "Pending","Yes","Pending"],
+      [10, 'New Task 10', "Pending","Yes","Pending"],
     ];
-    $assignee=[["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""]];
+    $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
+
 
 
 
@@ -101,22 +105,20 @@ function addingTask(){
           <tr class="border-b overflow-x-visible">
             {#each $tableData[0] as header, index}
             <th class={`px-4 py-2 flex-1  `}>
-              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative ' : (index===0)?'min-w-16':'min-w-64'} ">
+              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative ' : (index===0)?'min-w-16':'min-w-32 bg-red-300'} ">
                 {#if index >= 2}
                 <div class="">
                   <StatusCell textValue={header} colIdx={index}/>
                 </div>
                 {:else}
                 <div class="">
-                  <span>{header}</span>
-
+                  <span >{header}</span>
                 </div>
                 {/if}
   
                 {#if header === 'Task'}
                    <div class=" absolute right-0 ">
                     <Tableaddbutton onClick={addingTask} />
-
                    </div>
                 {/if}
               </div>
@@ -137,7 +139,7 @@ function addingTask(){
             {#each row as cell, index}
             <td class={`px-4 py-2 text-center relative ${columnStyles[index]} ${index === 1 ? 'group' : ''}`}>
               <div class="flex justify-center items-center h-full">
-                {#if index == 0}
+                {#if index === 0}
             <div class="flex-1">
               <span>{rowIndex + 1}</span>
             </div>

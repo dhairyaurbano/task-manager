@@ -17,18 +17,16 @@
 
   // let Statuswidget=TaskStatusDropDown;
     $tableData = [
-      ['SL NO.', 'Task', 'Status 1','Status 2','Status 3'], 
-      [1, 'New Task 1', "Pending","Pending","No"],
-      [2, 'New Task 2', "Pending","Pending","Pending"],
-      [3, 'New Task 3', "Pending","Yes","Pending"],
-      [4, 'New Task 4', "Pending","Pending","Pending"],
-      [5, 'New Task 5', "In Progress","Pending","Pending"],
-      [6, 'New Task 6', "Pending","Pending","Pending"],
+      ['SL NO.', 'Task', 'Status 1','Status 2'], 
+      [1, 'New Task 1', "Pending","Pending"],
+      [2, 'New Task 2', "Pending","Pending"],
+      [3, 'New Task 3', "Pending","Yes"],
+      [4, 'New Task 4', "Pending","Pending"],
+      [5, 'New Task 5', "In Progress","Pending"],
+      [6, 'New Task 6', "Pending","Pending"],
 
     ];
-    $assignee=[["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""]];
-
-
+    $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
 
     function OpenDeletePopUp(){
       $isDeletePopUpOpen = true;
@@ -38,7 +36,7 @@
     let deletingrowidx=$tableData.length-1;
     let deletingcolidx=$tableData[0].length-1;
   
-    let columnStyles = ['min-w-24', 'w-full', 'min-w-32']; 
+    let columnStyles = ['min-w-16 ', 'w-full', 'w-28']; 
   
     function addColumn() {
       const newColumnName = 'Status ' + ($tableData[0].length - 1);
@@ -93,22 +91,22 @@ function addingTask(){
 <SelectTemplatePopUp/>
 {/if}
 
-
-  <div class="mx-1 my-2 rounded-lg border-2 border-gray-300 overflow-x-auto overflow-y-visible max-w-5xl">
+<div class="max-w-full">
+  <div class="mx-1 my-2 rounded-lg border-2 border-gray-300 overflow-x-auto overflow-y-visible max-w-xl">
     <div class="overflow-x-scroll overflow-y-visible  ">
       <table class="table-auto border-collapse bg-white">
-        <thead class="relative">
+        <thead class="relative ">
           <tr class="border-b overflow-x-visible">
             {#each $tableData[0] as header, index}
             <th class={`px-4 py-2 flex-1  `}>
-              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative ' : (index===0)?'min-w-16':'min-w-64'} ">
+              <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-64 relative ' : (index===0)?'min-w-16':'w-28 '} ">
                 {#if index >= 2}
-                <div class="">
+                <div class="bg-red-400 ">
                   <StatusCell textValue={header} colIdx={index}/>
                 </div>
                 {:else}
-                <div class="">
-                  <span>{header}</span>
+                <div >
+                  <span class="text-center text-base">{header}</span>
 
                 </div>
                 {/if}
@@ -159,5 +157,8 @@ function addingTask(){
       </table>
     </div>
   </div>
+
+</div>
+
   
   

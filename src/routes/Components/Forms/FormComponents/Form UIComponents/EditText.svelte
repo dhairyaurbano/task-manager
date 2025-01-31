@@ -32,7 +32,7 @@
     on:input={handleInput}
     on:keydown={handleKeyDown}
     disabled={!$editable}
-    class="border border-gray-300 rounded-md p-2 text-lg w-full focus:border-blue-500 focus:outline-none shadow-none border-none text-center"
+    class="border border-gray-300 rounded-md p-2 text-lg w-full focus:border-blue-500 focus:outline-none shadow-none border-none text-center text-base"
    />
  
 

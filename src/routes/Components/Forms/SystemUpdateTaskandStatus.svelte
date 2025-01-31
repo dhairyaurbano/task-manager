@@ -5,7 +5,11 @@
 	import SystemTabTable from "../UI Components/Tables/SystemTabTable.svelte";
     import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import TaskStatusDropDown from '../UI Components/DropDownMenus/TaskStatusDropDown.svelte';
-    import { templatePopUpOpen } from "$lib/SystemTab/templatePopUp.js";
+    import { templatePopUpOpen,selectedTemplate } from "$lib/SystemTab/templatePopUp.js";
+	import SystemTable2 from '../UI Components/Tables/SystemTable2.svelte';
+	import SystemTable3 from '../UI Components/Tables/SystemTable3.svelte';
+	import SystemTable4 from '../UI Components/Tables/SystemTable4.svelte';
+
 
 	// import DeletingTaskPopup from "../UI Components/PopUp/DeletingTaskPopup.svelte";
 
@@ -39,7 +43,7 @@
 
 
 
-<div class="flex flex-col ">
+<div class="flex flex-col max-w-full">
     <div class="flex flex-row justify-between items-center ">
         <div class=" flex justify-center items-center ">
             <h2 class="text-2xl font-semibold text-gray-700 text-center">User Task & Status</h2>
@@ -85,6 +89,11 @@
     </div>
     <div class="w-full border-b-2 border-gray-300 mt-4"></div>
 
+    {#if $selectedTemplate===1}
     <SystemTabTable/>
+    {:else}
+    <SystemTabTable/>
+    {/if} 
+
 </div>
 

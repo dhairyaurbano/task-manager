@@ -26,7 +26,8 @@
       [6, 'New Task 6', "Pending","Pending","Pending"],
 
     ];
-    $assignee=[["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""],["Not assigned",""]];
+    $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
+
 
 
 

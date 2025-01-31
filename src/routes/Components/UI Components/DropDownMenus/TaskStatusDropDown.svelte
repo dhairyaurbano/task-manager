@@ -55,34 +55,24 @@
   }
 </script>
 
-<div class="relative w-64">
+<div class="relative min-w-28">
 <!-- Dropdown Trigger -->
 <button
   type="button"
-  class="w-full flex items-center justify-between px-4 py-2 hover:border rounded-lg bg-white hover:shadow-md z-30"
+  class="w-full flex items-center justify-between py-2 hover:border rounded-lg bg-white hover:shadow-md z-30"
   on:click={toggleDropdown}
   on:mouseenter={() => dropdowniconVisible = true}  
   on:mouseleave={() => dropdowniconVisible = false}
 >
   <div class="flex items-center justify-center w-full">
-    <div class={`rounded-full p-1 flex flex-row items-center ${selectedOption.bgColor}`}>
-      <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${selectedOption.dotColor}`}></div>
-      <span class={`font-normal mr-1 ${selectedOption.textColor} ml-3`}>
+    <div class={`rounded-full  p-1 mx-2 flex flex-row items-center ${selectedOption.bgColor}`}>
+      <div class={`rounded-full flex items-center justify-center w-2 h-2 mx-1 ${selectedOption.dotColor}`}></div>
+      <span class={`font-normal text-sm text-nowrap ${selectedOption.textColor}`}>
         {selectedOption.label}
       </span>
     </div>
   </div>
   
-  {#if dropdowniconVisible}
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-5 w-5 text-gray-500"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-  {/if}
 </button>
 
 <!-- Dropdown Menu -->
@@ -94,8 +84,8 @@
         on:click={() => selectOption(option)}
       >
         <div class={`rounded-full p-1 flex flex-row items-center ${option.bgColor}`}>
-          <div class={`rounded-full flex items-center justify-center w-3 h-3 ml-3 ${option.dotColor}`}></div>
-          <span class={`font-normal mr-1 ${option.textColor} ml-3`}>
+          <div class={`rounded-full flex items-center justify-center w-2 h-2 mx-1 ${option.dotColor}`}></div>
+          <span class={`font-normal text-nowrap text-sm ${option.textColor}`}>
             {option.label}
           </span>
         </div>

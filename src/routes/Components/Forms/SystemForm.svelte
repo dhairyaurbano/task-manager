@@ -35,7 +35,8 @@
     console.table($tableData);
   }
 </script>
-<form action="" method="POST">
+<div class="max-w-full">
+  <form action="" method="POST">
 
     <div class="mb-3">
       <label for="dropdown" class="block text-sm font-medium text-gray-600 ">
@@ -108,3 +109,4 @@
       
         
   </form>
+</div>

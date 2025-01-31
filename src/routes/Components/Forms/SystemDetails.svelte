@@ -23,12 +23,12 @@
 
 
 </script>
-<div class="p-6 w-full bg-[#00000015]  rounded-lg shadow-md  ">
+<div class="p-6 max-w-full bg-[#00000015]  rounded-lg shadow-md  ">
   
     <div><p class="text-2xl font-semibold text-gray-700 mb-6">System</p></div>
     
   
-    <div class="w-full">
+    <div class="max-w-full">
         
         <div class="flex flex-row justify-between items-center ">
             <!-- Red Div -->
