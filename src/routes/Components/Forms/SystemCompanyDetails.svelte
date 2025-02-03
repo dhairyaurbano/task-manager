@@ -5,18 +5,25 @@
       import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
 
 import Select from 'svelte-select';
-// const itemId = 'id';
-//   const label = 'title';
 
-//   const items = [
-//     {id: 0, title: 'Foo'},
-//     {id: 1, title: 'Bar'},
-//     {id: 2, title: 'Tar'},
-//     {id: 3, title: 'Jar'},
-//     {id: 4, title: 'Par'},
-//     {id: 5, title: 'Bar'},
+function validateFields(event){
+    const selectElement = event.target;
 
-//   ];
+    if (!selectElement.value) {
+      selectElement.setCustomValidity("Please Enter Valid company name");
+    } else {
+      selectElement.setCustomValidity("");
+    }
+}
+
+
+
+// const label="Dhaa";
+let items = [
+        { value: '12001232', label: '12001232' },
+        { value: '12001234', label: '12001234' },
+        { value: '12001235', label: '12001235' },
+    ];
 
     updateSteps(0);
     function updateSteps(index) {
@@ -31,6 +38,15 @@ import Select from 'svelte-select';
      
     function savedetials() {
       console.log("We have completed the company details tab , Now location detail tab");
+      event.preventDefault(); // Prevent form submission
+    const form = event.target.closest("form");
+
+
+    if (!form.checkValidity()) {
+      // If form is invalid, show validation messages
+      form.reportValidity();
+      return;
+    }
       $activeTab = 1;
       updateSteps(1);
     }
@@ -60,14 +76,17 @@ import Select from 'svelte-select';
   
   <div class="p-6 max-w-full bg-[#00000015] rounded-lg shadow-md ">
       <h2 class="text-2xl font-semibold text-gray-700 text-start mb-6">Company Details</h2>
-      <form action="" method="POST">
+      <form on:submit method="POST">
         <!-- Company Name -->
         <div class="mb-3">
             <label for="dropdown" class="block text-sm font-medium text-gray-600 ">
                 System Name
                 <span class="text-red-500">*</span>
             </label>
-            <select id="dropdown" bind:value={$CompanyDetailsSystemTab.companyName} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+            <select id="dropdown" bind:value={$CompanyDetailsSystemTab.companyName} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+            on:invalid={validateFields} 
+        on:input={validateFields}
+            required>
                 <option value="" disabled selected>Select Company</option>
                 {#each CompanyNameoptions as option}
                     <option value={option.value}>{option.label}</option>
@@ -82,7 +101,10 @@ import Select from 'svelte-select';
                 Company Location
                 <span class="text-red-500">*</span>
             </label>
-            <select id="dropdown" bind:value={$CompanyDetailsSystemTab.companylocation} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+            <select id="dropdown" bind:value={$CompanyDetailsSystemTab.companylocation} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            on:invalid={validateFields} 
+        on:input={validateFields}
+            required>
                 <option value="" disabled selected>Select Location</option>
                 {#each CompanyLoationoptions as option}
                     <option value={option.value}>{option.label}</option>
@@ -110,8 +132,14 @@ import Select from 'svelte-select';
         </div> -->
 
 
+        <div class="mb-3">
+            <label for="ponumber" class="block text-sm font-medium text-gray-600 mb-1">
+                PO Number
+                <span class="text-red-500">*</span>
+            </label>
+        <Select {items} multiple required />
 
-<!-- <Select {label} {items} multiple/> -->
+          </div>
   
         <!-- Description -->
         <TextAreaView 
@@ -153,7 +181,7 @@ import Select from 'svelte-select';
                 leadingalt="Next Icon"
                 laggingimg=""
                 laggingalt=""
-                type="button"
+                type="submit"
                 onClick={savedetials}
             />
             </div>

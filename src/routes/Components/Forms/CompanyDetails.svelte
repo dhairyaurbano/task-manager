@@ -5,7 +5,7 @@
 	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
 
 
-  function validateCompanyName(event) {
+  function validateFields(event) {
     const selectElement = event.target;
 
     if (!selectElement.value) {
@@ -53,8 +53,8 @@
         inputtype="text" 
         required={true}
         bind:value={$CompanyDetails.companyName} 
-        on:invalid={validateCompanyName} 
-        on:input={validateCompanyName}
+        on:invalid={validateFields} 
+        on:input={validateFields}
       />
 
       <!-- Company Website -->
