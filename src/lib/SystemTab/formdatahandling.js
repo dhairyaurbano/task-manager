@@ -4,7 +4,7 @@ import { writable } from 'svelte/store';
 export const CompanyDetailsSystemTab = writable({
   companyName: '',
   companyWebsite: '',
-  PONumber: '',
+  PONumber: [],
   companydescription: '',
   companylocation:'',
   systemname:'',

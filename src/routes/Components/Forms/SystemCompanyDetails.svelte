@@ -3,7 +3,21 @@
     import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
     import {activeTab, CompanyDetailsSystemTab,steps} from '../../../lib/SystemTab/formdatahandling.js'
       import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
-  
+
+import Select from 'svelte-select';
+// const itemId = 'id';
+//   const label = 'title';
+
+//   const items = [
+//     {id: 0, title: 'Foo'},
+//     {id: 1, title: 'Bar'},
+//     {id: 2, title: 'Tar'},
+//     {id: 3, title: 'Jar'},
+//     {id: 4, title: 'Par'},
+//     {id: 5, title: 'Bar'},
+
+//   ];
+
     updateSteps(0);
     function updateSteps(index) {
       steps.update((allSteps) =>
@@ -76,20 +90,28 @@
             </select>
         </div>
   
-        <!-- GST Number -->
+        <!-- PO Number -->
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="dropdown" class="block text-sm font-medium text-gray-600 ">
                 PO Number
                 <span class="text-red-500">*</span>
             </label>
-            <select id="dropdown" bind:value={$CompanyDetailsSystemTab.PONumber} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-                <option value="" disabled selected>Select PO Number</option>
+            <select 
+                id="dropdown" 
+                bind:value={$CompanyDetailsSystemTab.PONumber} 
+                multiple
+                class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
                 {#each CompanyPONumberoptions as option}
                     <option value={option.value}>{option.label}</option>
                 {/each}
             </select>
-        </div>
+        </div> -->
+
+
+
+<!-- <Select {label} {items} multiple/> -->
   
         <!-- Description -->
         <TextAreaView 

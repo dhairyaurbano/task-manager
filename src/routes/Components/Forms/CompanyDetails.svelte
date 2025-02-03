@@ -4,25 +4,46 @@
   import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
 	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
 
+
+  function validateCompanyName(event) {
+    const selectElement = event.target;
+
+    if (!selectElement.value) {
+      selectElement.setCustomValidity("Please Enter Valid company name");
+    } else {
+      selectElement.setCustomValidity("");
+    }
+  }
+
   function updateSteps(index) {
     steps.update((allSteps) =>
       allSteps.map((step, i) => ({
         ...step,
-        selected: i <= index, // Set selected to true only for the clicked step
+        selected: i <= index,
       }))
     );
   }
 
   function savedetials() {
     console.log("We have completed the company details tab , Now location detail tab");
-    $activeTab = 1;
+    event.preventDefault(); // Prevent form submission
+    const form = event.target.closest("form");
+
+
+    if (!form.checkValidity()) {
+      // If form is invalid, show validation messages
+      form.reportValidity();
+      return;
+    }
+    
+    activeTab.set(1);
     updateSteps(1);
   }
 </script>
 
 <div class="p-6 w-full bg-[#00000015] rounded-lg shadow-md">
     <h2 class="text-2xl font-semibold text-gray-700 text-start mb-6">Company Details</h2>
-    <form action="" method="POST">
+    <form on:submit action="" method="POST">
       <!-- Company Name -->
       <TextView 
         id="companyName" 
@@ -32,6 +53,8 @@
         inputtype="text" 
         required={true}
         bind:value={$CompanyDetails.companyName} 
+        on:invalid={validateCompanyName} 
+        on:input={validateCompanyName}
       />
 
       <!-- Company Website -->
@@ -41,7 +64,7 @@
         name="companyWebsite" 
         placeholder="Enter company website" 
         inputtype="url" 
-        required={true} 
+        required={false} 
         bind:value={$CompanyDetails.companyWebsite} 
       />
 
@@ -52,7 +75,7 @@
         name="gstNumber" 
         placeholder="Enter GST number" 
         inputtype="number" 
-        required={true} 
+        required={false} 
         bind:value={$CompanyDetails.gstNumber} 
       />
 
@@ -78,7 +101,7 @@
     leadingalt="Save Icon"
     laggingimg=""
     laggingalt=""
-    type="button"
+    type="submit"
     onClick={savedetials}
 />
     </form>

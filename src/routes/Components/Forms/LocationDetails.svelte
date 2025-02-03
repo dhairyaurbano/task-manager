@@ -4,9 +4,20 @@
 	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
   import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
 
+
+  function validateDropdown(event) {
+    const selectElement = event.target;
+
+    if (!selectElement.value) {
+      selectElement.setCustomValidity("Please select a location before proceeding.");
+    } else {
+      selectElement.setCustomValidity("");
+    }
+  }
+
   function savedetials(){
-    console.log("Company name: "+ $CompanyDetails.companyName);
-    console.log("Company website: "+ $CompanyDetails.companyWebsite);
+    console.log("Company Name: "+ $CompanyDetails.companyName);
+    console.log("Company Website: "+ $CompanyDetails.companyWebsite);
     console.log("GST Number: "+ $CompanyDetails.gstNumber);
     console.log("Company Description: "+ $CompanyDetails.companydescription);
 
@@ -51,7 +62,11 @@
           Status Location
           <span class="text-red-500">*</span>
       </label>
-      <select id="dropdown" bind:value={$CompanyDetails.companylocation} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+      <select id="dropdown" bind:value={$CompanyDetails.companylocation} class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required
+      on:invalid={validateDropdown} 
+    on:input={validateDropdown}
+      
+      >
           <option value="" disabled selected>Select Location</option>
           {#each options as option}
               <option value={option.value}>{option.label}</option>
@@ -65,7 +80,7 @@
       name="zipCode" 
       placeholder="123456" 
       inputtype="number" 
-      required={true} 
+      required={false} 
       bind:value={$CompanyDetails.zipcode}
     />
     
@@ -75,7 +90,7 @@
       name="billTo" 
       placeholder="abcdef" 
       inputtype="text" 
-      required={true} 
+      required={false} 
       bind:value={$CompanyDetails.billto} 
     />
 
