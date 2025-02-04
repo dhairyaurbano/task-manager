@@ -2,7 +2,12 @@
 
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
   import {isDeleteStatusPopUpOpen,currDeletingColumnIdx} from '$lib/TaskDetails/deletingstatus.js';
-  import {tableData} from "$lib/TaskDetails/addtaskdatahandling.js";
+  import {tableData as tableDataSystem,assignee as systemDataassignee} from "$lib/TaskDetails/addtaskdatahandling.js";
+  import {tableData as tableDataTemplate,assignee as templateAssignee} from "$lib/Templates/addingtemplate.js";
+  export let context="templatetab";
+
+  $: currentTableData = context === "templatetab" ? tableDataTemplate : tableDataSystem;
+$: currentAssignee = context === "templatetab" ? templateAssignee : systemDataassignee;
 
   function ClosePanel() {
       $isDeleteStatusPopUpOpen = false; 
@@ -17,7 +22,7 @@
 
     console.log("Delete Column at index:", columnIdx);
 
-    tableData.update(currentData => {
+    currentTableData.update(currentData => {
         console.log("Before Deleting Column:");
         console.table(currentData);
 
@@ -50,13 +55,13 @@
   
       </div>
       <div class="flex " >
-        <img src="/deletetaskimg.png" alt="Delete Image" class="w-[275px] h-[237px]" />
+        <img src="/deletetaskimg.png" alt="Delete status" class="w-[275px] h-[237px]" />
         <div class=" flex flex-col items-center justify-center ">
           <div class="flex">
             <span class="text-2xl font-medium">Delete Status:</span>
           </div>
           <div>
-            <span class="text-xl font-normal">Do you want to delete <strong>{$tableData[0][$currDeletingColumnIdx]}</strong> Status?</span>
+            <span class="text-xl font-normal">Do you want to delete <strong>{$currentTableData[0][$currDeletingColumnIdx]}</strong> Status?</span>
           </div>
           <div class="flex my-5  items-center justify-center min-w-64">
             <div class="flex-1 flex justify-center items-center">

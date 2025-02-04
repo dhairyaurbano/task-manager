@@ -1,13 +1,13 @@
 <script>
-    import { tableData,assignee } from '../../../../lib/Templates/addingtemplate.js';
-    import { isDeletePopUpOpen } from '../../../../lib/Templates/deletingtask.js';
+    import { tableData,assignee } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
+    import { isDeletePopUpOpen } from '../../../../lib/TaskDetails/deletingtask.js';
     import Tableaddbutton from '../../Forms/FormComponents/Buttons/UIButtons/Tableaddbutton.svelte';
 	import TaskCellhoverButton from '../../Forms/FormComponents/Buttons/HoverButtons/TaskCellhoverButton.svelte';
 	import TaskStatusDropDown from '../DropDownMenus/TaskStatusDropDown.svelte';
 	import DeletingTaskPopup from '../PopUp/DeletingTaskPopup.svelte';
 	import StatusCell from './TableComponent/StatusCell.svelte';
-  import {isDeleteStatusPopUpOpen} from '$lib/Templates/deletingstatus.js';
-  import {isEditTaskPopUpOpen} from '$lib/Templates/editingtask.js';
+  import {isDeleteStatusPopUpOpen} from '$lib/TaskDetails/deletingstatus.js';
+  import {isEditTaskPopUpOpen} from '$lib/TaskDetails/editingtask.js';
 	import DeletingStatusPopup from '../PopUp/DeletingStatusPopup.svelte';
 	import TaskCell from './TableComponent/TaskCell.svelte';
 	import EditTaskPopUp from '../PopUp/EditTaskPopUp.svelte';
@@ -105,7 +105,7 @@ function addingTask(){
                 <div class="flex justify-center items-center {index === 1 ? 'flex-1  min-w-48 relative ' : (index===0)?'min-w-16':'w-28 '} ">
                   {#if index >= 2}
                   <div class=" ">
-                    <StatusCell textValue={header} colIdx={index}/>
+                    <StatusCell textValue={header} colIdx={index} context="systemtab"/>
                   </div>
                   {:else}
                   <div >
@@ -116,7 +116,7 @@ function addingTask(){
     
                   {#if header === 'Task'}
                      <div class=" absolute right-0 ">
-                      <Tableaddbutton onClick={addingTask} />
+                      <Tableaddbutton onClick={addingTask} context="systemtab"/>
   
                      </div>
                   {/if}
@@ -124,7 +124,7 @@ function addingTask(){
     
                 {#if index === 0} 
                   <div class="absolute -right-2 z-70 transform -translate-y-1/2 top-1/2">
-                    <Tableaddbutton onClick={addColumn} />
+                    <Tableaddbutton onClick={addColumn} context="systemtab"/>
                   </div>
                 {/if}
               </th>
@@ -144,10 +144,10 @@ function addingTask(){
               </div>
             {:else if index === 1}
               <div>
-                <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} />
+                <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} context="systemtab"/>
               </div>
             {:else}
-              <TaskStatusDropDown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} />
+              <TaskStatusDropDown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} context="systemtab"/>
             {/if}
                 </div>
     

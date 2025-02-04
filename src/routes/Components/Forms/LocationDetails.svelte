@@ -3,7 +3,7 @@
 	import TextAreaView from "./FormComponents/Form UIComponents/TextAreaView.svelte";
 	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
   import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
-
+  import { goto } from '$app/navigation';
 
   function validateDropdown(event) {
     const selectElement = event.target;
@@ -27,6 +27,8 @@
     console.log("Location Description: "+ $CompanyDetails.locationdesc);
 
     console.log("data saved sucessfully");
+    const currentPath = window.location.pathname; // Get current path
+    goto(`${currentPath}/confirmation`); // Append /confirmation to it
   }
   function addlocationHandler(){
     console.log("Add location button clicked");
@@ -55,7 +57,7 @@
     />
   </div>
   
-    <form action="" method="POST">
+    <form on:submit|preventDefault={savedetials}>
 
     <div class="mb-3">
       <label for="dropdown" class="block text-sm font-medium text-gray-600 ">

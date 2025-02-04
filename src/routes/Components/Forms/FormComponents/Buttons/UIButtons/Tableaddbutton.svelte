@@ -1,5 +1,7 @@
 <script>
     export let onClick = () => {}; // Default to a no-op function
+    export let context="templatetab";
+
 </script>
 
 <div class="text-center">

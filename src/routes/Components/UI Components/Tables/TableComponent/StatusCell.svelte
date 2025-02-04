@@ -4,6 +4,8 @@
     // export let edit=true;
     export let textValue = 'Status 1';
     export let colIdx=2;
+    export let context="templatetab";
+
 
     function handleInputChange(newValue) {
     textValue = newValue;

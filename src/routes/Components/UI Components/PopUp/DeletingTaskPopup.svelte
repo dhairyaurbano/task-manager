@@ -2,10 +2,13 @@
 
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
   import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
-  import { tableData,assignee } from "$lib/TaskDetails/addtaskdatahandling.js";
+  import {tableData as tableDataSystem,assignee as systemDataassignee} from "$lib/TaskDetails/addtaskdatahandling.js";
+  import {tableData as tableDataTemplate,assignee as templateAssignee} from "$lib/Templates/addingtemplate.js";
   import { deletingrowidx } from "$lib/TaskDetails/deletingtask.js";
+  export let context="templatetab";
 
-  // export let rowidx=1;
+  $: currentTableData = context === "templatetab" ? tableDataTemplate : tableDataSystem;
+  $: currentAssignee = context === "templatetab" ? templateAssignee : systemDataassignee;
 
   function ClosePanel() {
     isDeletePopUpOpen.set(false); 
@@ -15,14 +18,14 @@
 
         console.log("Delete Row " + $deletingrowidx);
 
-        tableData.update(data => {
+        currentTableData.update(data => {
             console.table(data);
             const updatedData = [...data]; 
             updatedData.splice($deletingrowidx, 1);
             console.table(updatedData);
             return updatedData; 
         });
-        assignee.update(data => {
+        currentAssignee.update(data => {
             console.table(data);
             const updatedData = [...data]; 
             updatedData.splice($deletingrowidx-1, 1);
@@ -45,13 +48,13 @@
   
       </div>
       <div class="flex " >
-        <img src="/deletetaskimg.png" alt="Delete Image" class="w-[275px] h-[237px]" />
+        <img src="/deletetaskimg.png" alt="Delete task" class="w-[275px] h-[237px]" />
         <div class=" flex flex-col items-center justify-center ">
           <div class="flex">
             <span class="text-2xl font-medium">Delete Task:</span>
           </div>
           <div>
-            <span class="text-xl font-normal">Do you want to delete <strong>{$tableData[$deletingrowidx][1]}</strong> Task?</span>
+            <span class="text-xl font-normal">Do you want to delete <strong>{$currentTableData[$deletingrowidx][1]}</strong> Task?</span>
           </div>
           <div class="flex my-5  items-center justify-center min-w-64">
             

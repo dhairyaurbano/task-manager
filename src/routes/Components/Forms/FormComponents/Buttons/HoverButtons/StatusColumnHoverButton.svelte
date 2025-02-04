@@ -2,7 +2,8 @@
     import {isDeleteStatusPopUpOpen,currDeletingColumnIdx} from '$lib/TaskDetails/deletingstatus.js';
     import {editable} from "$lib/TaskDetails/testingeditablefunctionality.js";
 	import DeletingStatusPopup from '../../../../UI Components/PopUp/DeletingStatusPopup.svelte';
-export let row=0
+export let row=0;
+
 
 export let colIdx=2;
       function handleButtonClick(row){
@@ -11,9 +12,7 @@ export let colIdx=2;
       function openDeletePopUp(colIdx){
         currDeletingColumnIdx.set(colIdx)
         console.log(`Column ${$currDeletingColumnIdx} was clicked`);
-        
-  
-        $isDeleteStatusPopUpOpen=true;
+        isDeleteStatusPopUpOpen.set(true);
         console.log("Delete status panel opened");
         console.log("Variable status: " + $isDeleteStatusPopUpOpen);
     }

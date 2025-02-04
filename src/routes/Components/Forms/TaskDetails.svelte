@@ -4,6 +4,8 @@
 	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
   import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
 	import TemplatesTable from "../UI Components/Tables/TemplatesTable.svelte";
+  import { goto } from '$app/navigation';
+
 
 
   function validateDropdown(event) {
@@ -17,17 +19,13 @@
   }
 
   function savedetials(){
-    console.log("Company Name: "+ $CompanyDetails.companyName);
-    console.log("Company Website: "+ $CompanyDetails.companyWebsite);
-    console.log("GST Number: "+ $CompanyDetails.gstNumber);
-    console.log("Company Description: "+ $CompanyDetails.companydescription);
+    console.log("Save detials clicked sucessfully");
+    const currentPath = window.location.pathname; // Get current path
+    goto(`${currentPath}/confirmation`);
+  }
 
-    console.log("Company location: "+ $CompanyDetails.companylocation);
-    console.log("Company zip code: "+ $CompanyDetails.zipcode);
-    console.log("Bill to: "+ $CompanyDetails.billto);
-    console.log("Location Description: "+ $CompanyDetails.locationdesc);
-
-    console.log("data saved sucessfully");
+  function goback(){
+    console.log("Go back clicked sucessfully");
   }
   function addlocationHandler(){
     console.log("Add location button clicked");
@@ -77,6 +75,42 @@
     <div class="w-full border-b-2 border-gray-300 mt-2"></div>
     <!-- Yaha par ek table aaiga -->
     <TemplatesTable/>
+    <div class="flex  flex-row justify-start items-center">
+      <div class="mx-2">
+          <ButtonComponent
+bgcolor="bg-white"
+textcolor="text-sky-500"
+bordercolor="bg-white"
+focusringcolor="focus:ring-sky-400"
+hoverbg="hover:bg-sky-50"
+rounded="rounded-full"
+leadingimg="/solar_arrow-right-broken.png"
+leadingalt="Next Icon"
+laggingimg=""
+laggingalt=""
+type="button"
+onClick={goback}
+/>
+      </div>
+      <div class="mx-2">
+          <ButtonComponent
+          label="Save & Next"
+          bgcolor="bg-white"
+          textcolor="text-sky-500"
+          bordercolor="border-sky-500"
+          focusringcolor="focus:ring-sky-400"
+          hoverbg="hover:bg-sky-50"
+          rounded="rounded-full"
+          leadingimg="/solar_arrow-left-broken.png"
+          leadingalt="Next Icon"
+          laggingimg=""
+          laggingalt=""
+          type="submit"
+          onClick={savedetials}
+      />
+      </div>
+      
+  </div>
 </div>
 
 <style>

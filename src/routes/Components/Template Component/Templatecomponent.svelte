@@ -1,5 +1,5 @@
 <script>
-	import { tableData, assignee } from '$lib/Templates/addingtemplate.js';
+	import { tableData, assignee } from '$lib/TaskDetails/addtaskdatahandling.js';
 	import ButtonComponent from '../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte';
 	export let templatelable = 'Test Template';
 	export let templateid = 1;

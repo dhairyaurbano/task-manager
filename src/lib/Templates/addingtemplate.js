@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
-  export let isOpen = writable(false);
-  export let tableData = writable([
+  export let isOpenTemplate = writable(false);
+  export let tableDataTemplate = writable([
     ['SL NO.', 'Task', 'Status'], // First row contains column headers
     
 ]);
-export let assignee = writable([["Unassigned"],[""]]);
+export let assigneeTemplate = writable([["Unassigned"],[""]]);

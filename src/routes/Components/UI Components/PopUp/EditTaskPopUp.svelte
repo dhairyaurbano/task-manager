@@ -1,17 +1,23 @@
 <script>
   import TextAreaView from "../../Forms/FormComponents/Form UIComponents/TextAreaView.svelte";
   import TextView from "../../Forms/FormComponents/Form UIComponents/TextView.svelte";
-  import {tableData,assignee} from "$lib/TaskDetails/addtaskdatahandling.js";
+  import {tableData as tableDataSystem,assignee as systemDataassignee} from "$lib/TaskDetails/addtaskdatahandling.js";
+  import {tableData as tableDataTemplate,assignee as templateAssignee} from "$lib/Templates/addingtemplate.js";
   import {currentrow,isEditTaskPopUpOpen} from "$lib/TaskDetails/editingtask.js";
   import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
 import TaskStatusDropDown from "../DropDownMenus/TaskStatusDropDown.svelte";
 	import NotApplicable from "../TaskStatus/NotApplicable.svelte";
 import {gettingDictionaryReady,result,search,query} from '$lib/Logic/autoSuggestion.js';
+export let context="templatetab";
 
 
-let taskname=$tableData[$currentrow][1];
-let taskdesc=$assignee[$currentrow-1][1];
+// Select the correct data reference based on the context
+$: currentTableData = context === "templatetab" ? tableDataTemplate : tableDataSystem;
+$: currentAssignee = context === "templatetab" ? templateAssignee : systemDataassignee;
 
+  // Accessing the data properly
+  let taskname = $currentTableData[$currentrow][1];
+  let taskdesc = $currentAssignee[$currentrow - 1][1];
 
 function searchresult() {
   const dictionary = [
@@ -27,7 +33,7 @@ function searchresult() {
 
   function selectPerson(name) {
     selectedPerson = name;
-    $tableData[$currentrow][1]=name;
+    $currentTableData[$currentrow][1]=name;
     query.set(name); 
     result.set([]);  
   }
@@ -39,44 +45,15 @@ function searchresult() {
     console.log($isEditTaskPopUpOpen);
   }
 
-  // function saveallUpdates() {
-  //   console.log("Save all details button clicked");
-  //   console.log("Task name: "+taskname);
-  //   console.log("Task desc: "+taskdesc);
-  //   console.log("Status Option: "+selectedPerson);
-
-  //   tableData.update(currentData => {
-  //     console.table(currentData);
-  //       return currentData.map((row, index) => {
-  //           if (index === currentrow) {
-  //               let newRow = [...row]; // Copy row to prevent mutation
-  //               newRow[1] = taskname;  // Update task name
-  //               return newRow;
-  //           }
-  //           console.table(updatedData);
-  //           return row;
-  //       });
-        
-  //   });
-  //   assignee.update(a => {
-  //       a[$currentrow] = [selectedPerson,taskdesc];
-  //       return [...a]; 
-  //   });
-  //   toggleSystemPanel();
-  // }
-
   function saveallUpdates() {
     console.log("Save all details button clicked");
     console.log("Task name: " + taskname);
     console.log("Task desc: " + taskdesc);
     console.log("Status Option: " + selectedPerson);
 
-    // console.log("Before update - tableData:");
-    // console.table($tableData); // Log tableData before updating
 
-    tableData.update(currentData => {
-        // console.log("Inside update function - Before modification:");
-        // console.table(currentData); // Log before modifying
+    currentTableData.update(currentData => {
+
 
         const updatedData = currentData.map((row, index) => {
             if (index === $currentrow) {
@@ -86,20 +63,16 @@ function searchresult() {
             return row;
         });
 
-        // console.log("After modification - tableData:");
-        // console.table(updatedData); // Log the modified tableData
-
         return updatedData;
     });
 
-    // Log Assignee before updating
     console.log("Before update - assignee:");
-    console.table($assignee);
+    console.table($currentAssignee);
 
-    assignee.update(a => {
+    currentAssignee.update(a => {
         a[$currentrow-1] = [selectedPerson,taskdesc];
         console.log("After update - assignee:");
-        console.table($assignee);
+        console.table($currentAssignee);
         return [...a]; 
     });
 

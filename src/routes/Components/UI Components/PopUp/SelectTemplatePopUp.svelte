@@ -7,6 +7,8 @@
 	import TemplateAddcomponent from "../../Template Component/TemplateAddcomponent.svelte";
 	import TemplateSearchBar from "../SearchBar/TemplateSearchBar.svelte";
     
+    export let context="templatetab";
+
 function closeTemplatePopUp(){
     templatePopUpOpen.set(false);
 }

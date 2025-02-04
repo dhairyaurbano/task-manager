@@ -1,6 +1,7 @@
 <script>
 	import StatusColumnHoverButton from "../../../Forms/FormComponents/Buttons/HoverButtons/StatusColumnHoverButton.svelte";
 	import TaskCellhoverButton from "../../../Forms/FormComponents/Buttons/HoverButtons/TaskCellhoverButton.svelte";
+  export let context="templatetab";
 
     export let taskname="Custom Task name";
     export let assignedTo="choose assigned to";

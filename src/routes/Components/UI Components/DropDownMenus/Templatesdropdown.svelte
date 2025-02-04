@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     export let statusValue = "Not Applicable";
+    export let context="templatetab";
     let isOpen = false; 
     let dropdowniconVisible = false;
     

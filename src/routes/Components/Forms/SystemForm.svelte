@@ -10,6 +10,7 @@
         console.log("Back button clicked");
     }
   import {activeTab,activeSystemTab, CompanyDetailsSystemTab,steps, systemSubTabs} from '../../../lib/SystemTab/formdatahandling.js';
+  import { goto } from '$app/navigation';
   import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import SystemUpdateTaskandStatus from "./SystemUpdateTaskandStatus.svelte";
 
@@ -17,6 +18,8 @@
     console.log("System name: "+ $CompanyDetailsSystemTab.systemname);
     console.log("System ID: "+ $CompanyDetailsSystemTab.systemid);
         console.log("data saved sucessfully");
+        const currentPath = window.location.pathname; // Get current path
+    goto(`${currentPath}/confirmation`);
   }
 
     $isOpen=false;
@@ -36,7 +39,7 @@
   }
 </script>
 <div class="max-w-full">
-  <form action="" method="POST">
+  <form on:submit|preventDefault={savedetials}>
 
     <div class="mb-3">
       <label for="dropdown" class="block text-sm font-medium text-gray-600 ">
