@@ -2,6 +2,7 @@
 	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
     import { tableData,isOpen } from '$lib/TaskDetails/addtaskdatahandling.js';
     import { templatePopUpOpen} from "$lib/SystemTab/templatePopUp.js";
+    import { goto } from '$app/navigation';
 
 
 	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
@@ -17,6 +18,8 @@
     console.log("System name: "+ $CompanyDetailsSystemTab.systemname);
     console.log("System ID: "+ $CompanyDetailsSystemTab.systemid);
         console.log("data saved sucessfully");
+        const currentPath = window.location.pathname; // Get current path
+    goto(`${currentPath}/confirmation`); // Append /confirmation to it
   }
 
     $isOpen=false;
@@ -36,7 +39,7 @@
   }
 </script>
 <div class="max-w-full">
-  <form action="" method="POST">
+  <form on:submit|preventDefault={savedetials}>
 
     <div class="mb-3">
       <label for="dropdown" class="block text-sm font-medium text-gray-600 ">

@@ -4,7 +4,7 @@
 	import TextView from "./FormComponents/Form UIComponents/TextView.svelte";
   import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
 	import TemplatesTable from "../UI Components/Tables/TemplatesTable.svelte";
-
+  import { goto } from '$app/navigation';
 
   function validateDropdown(event) {
     const selectElement = event.target;
@@ -15,6 +15,10 @@
       selectElement.setCustomValidity("");
     }
   }
+  function goback(){
+        window.history.back();
+        console.log("Back button clicked");
+    }
 
   function savedetials(){
     console.log("Company Name: "+ $CompanyDetails.companyName);
@@ -28,6 +32,8 @@
     console.log("Location Description: "+ $CompanyDetails.locationdesc);
 
     console.log("data saved sucessfully");
+    const currentPath = window.location.pathname; // Get current path
+    goto(`${currentPath}/confirmation`); // Append /confirmation to it
   }
   function addlocationHandler(){
     console.log("Add location button clicked");
@@ -77,6 +83,44 @@
     <div class="w-full border-b-2 border-gray-300 mt-2"></div>
     <!-- Yaha par ek table aaiga -->
     <TemplatesTable/>
+
+    <div class="flex  flex-row justify-start items-center">
+      <div class="mx-2">
+          <ButtonComponent
+bgcolor="bg-white"
+textcolor="text-sky-500"
+bordercolor="bg-white"
+focusringcolor="focus:ring-sky-400"
+hoverbg="hover:bg-sky-50"
+rounded="rounded-full"
+leadingimg="/solar_arrow-right-broken.png"
+leadingalt="Next Icon"
+laggingimg=""
+laggingalt=""
+type="button"
+onClick={goback}
+/>
+      </div>
+      <div class="mx-2">
+          <ButtonComponent
+          label="Save & Next"
+          bgcolor="bg-white"
+          textcolor="text-sky-500"
+          bordercolor="border-sky-500"
+          focusringcolor="focus:ring-sky-400"
+          hoverbg="hover:bg-sky-50"
+          rounded="rounded-full"
+          leadingimg="/solar_arrow-left-broken.png"
+          leadingalt="Next Icon"
+          laggingimg=""
+          laggingalt=""
+          type="submit"
+          onClick={savedetials}
+      />
+      </div>
+      
+  </div>
+
 </div>
 
 <style>
