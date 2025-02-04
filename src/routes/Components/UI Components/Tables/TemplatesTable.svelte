@@ -1,30 +1,27 @@
 <script>
-    import { tableData,assignee } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
-    import { isDeletePopUpOpen } from '../../../../lib/TaskDetails/deletingtask.js';
+    import { tableData,assignee } from '$lib/Templates/addingtemplate.js';
+    import { isDeletePopUpOpen } from '$lib/Templates/deletingtask';
+    import {isEditTaskPopUpOpen} from '$lib/Templates/editingtask';
+  import {isDeleteStatusPopUpOpen} from '$lib/Templates/deletingstatus.js';
     import Tableaddbutton from '../../Forms/FormComponents/Buttons/UIButtons/Tableaddbutton.svelte';
 	import TaskCellhoverButton from '../../Forms/FormComponents/Buttons/HoverButtons/TaskCellhoverButton.svelte';
 	import Templatesdropdown from '../DropDownMenus/Templatesdropdown.svelte';
 	import DeletingTaskPopup from '../PopUp/DeletingTaskPopup.svelte';
 	import StatusCell from './TableComponent/StatusCell.svelte';
-  import {isDeleteStatusPopUpOpen} from '$lib/TaskDetails/deletingstatus.js';
-  import {isEditTaskPopUpOpen} from '$lib/TaskDetails/editingtask.js';
 	import DeletingStatusPopup from '../PopUp/DeletingStatusPopup.svelte';
 	import TaskCell from './TableComponent/TaskCell.svelte';
 	import EditTaskPopUp from '../PopUp/EditTaskPopUp.svelte';
-  import { selectedTemplate,templatePopUpOpen } from "$lib/SystemTab/templatePopUp.js";
 	import Templatecomponent from '../../Template Component/Templatecomponent.svelte';
 	import SelectTemplatePopUp from '../PopUp/SelectTemplatePopUp.svelte';
 
-  // let Statuswidget=TaskStatusDropDown;
-    
     $tableData = [
       ['SL NO.', 'Task', 'Status 1'], 
-      [1, 'New Task 1', "Applicable"],
-      [2, 'New Task 2', "Applicable"],
-      [3, 'New Task 3', "Applicable"],
-      [4, 'New Task 4', "Applicable"],
-      [5, 'New Task 5', "Not Applicable"],
-      [6, 'New Task 6', "Applicable"],
+      [1, 'Template Task 1', "Applicable"],
+      [2, 'Template Task 2', "Applicable"],
+      [3, 'Template Task 3', "Applicable"],
+      [4, 'Template Task 4', "Applicable"],
+      [5, 'Template Task 5', "Not Applicable"],
+      [6, 'Template Task 6', "Applicable"],
 
     ];
     $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
@@ -39,37 +36,37 @@
   
     let columnStyles = ['min-w-16 ', 'w-full', 'w-28']; 
   
-    function addColumn() {
-      const newColumnName = 'Status ' + ($tableData[0].length - 1);
+    // function addColumn() {
+    //   const newColumnName = 'Status ' + ($tableData[0].length - 1);
   
-      $tableData[0] = [...$tableData[0], newColumnName];
+    //   $tableData[0] = [...$tableData[0], newColumnName];
   
-      for (let i = 1; i < $tableData.length; i++) {
-        $tableData[i] = [...$tableData[i], "Pending"];
-      }
-    }
+    //   for (let i = 1; i < $tableData.length; i++) {
+    //     $tableData[i] = [...$tableData[i], "Pending"];
+    //   }
+    // }
   
 
-function addingTask(){
-  const newRow = [
-            $tableData.length, 
-            "New Task",
-            "Pending" 
-        ];
-        const numberOfColumns = $tableData[0].length;
-        for (let i = newRow.length; i < numberOfColumns;i++) {
-            newRow.push("Pending"); 
-        }
-        tableData.update(data => {
-            data.push(newRow);
-            return data;
-        });
+// function addingTask(){
+//   const newRow = [
+//             $tableData.length, 
+//             "New Task",
+//             "Pending" 
+//         ];
+//         const numberOfColumns = $tableData[0].length;
+//         for (let i = newRow.length; i < numberOfColumns;i++) {
+//             newRow.push("Pending"); 
+//         }
+//         tableData.update(data => {
+//             data.push(newRow);
+//             return data;
+//         });
 
-        assignee.update(data => {
-            data.push(["Not assigned",""]);
-            return data;
-        });
-}
+//         assignee.update(data => {
+//             data.push(["Not assigned",""]);
+//             return data;
+//         });
+// }
 
 
   </script>
@@ -87,10 +84,7 @@ function addingTask(){
 {#if $isEditTaskPopUpOpen}
 <EditTaskPopUp/>
 {/if}
-  
-{#if $templatePopUpOpen}
-<SelectTemplatePopUp/>
-{/if}
+
 <div class="mx-auto  w-full">
   <div class="threshold1:max-w-lg threshold2:max-w-xl threshold3:max-w-2xl threshold4:max-w-3xl threshold5:max-w-4xl threshold6:max-w-5xl threshold7: max-w-6xl threshold8:max-w-7xl  mx-auto"> 
     <div class="mx-auto my-2 rounded-lg border-2 border-gray-300  max-w-full p-1 bg-white">
@@ -114,15 +108,19 @@ function addingTask(){
     
                   {#if header === 'Task'}
                      <div class=" absolute right-0 ">
-                      <Tableaddbutton onClick={addingTask} />
-  
+
+
+                      <Tableaddbutton bind:tableData={$tableData} bind:assigneeData={$assignee} role="addtask"/>
+
+
                      </div>
                   {/if}
                 </div>
     
                 {#if index === 0} 
                   <div class="absolute -right-2 z-70 transform -translate-y-1/2 top-1/2">
-                    <Tableaddbutton onClick={addColumn} />
+                    <Tableaddbutton bind:tableData={$tableData} bind:assigneeData={$assignee} role="addstatus"/>
+
                   </div>
                 {/if}
               </th>
