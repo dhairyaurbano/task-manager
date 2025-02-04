@@ -1,13 +1,13 @@
 <script>
-    import { tableData,assignee } from '../../../../lib/Templates/addingtemplate.js';
-    import { isDeletePopUpOpen } from '../../../../lib/Templates/deletingtask.js';
+    import { tableData,assignee } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
+    import { isDeletePopUpOpen } from '../../../../lib/TaskDetails/deletingtask.js';
     import Tableaddbutton from '../../Forms/FormComponents/Buttons/UIButtons/Tableaddbutton.svelte';
 	import TaskCellhoverButton from '../../Forms/FormComponents/Buttons/HoverButtons/TaskCellhoverButton.svelte';
-	import TaskStatusDropDown from '../DropDownMenus/TaskStatusDropDown.svelte';
+	import Templatesdropdown from '../DropDownMenus/Templatesdropdown.svelte';
 	import DeletingTaskPopup from '../PopUp/DeletingTaskPopup.svelte';
 	import StatusCell from './TableComponent/StatusCell.svelte';
-  import {isDeleteStatusPopUpOpen} from '$lib/Templates/deletingstatus.js';
-  import {isEditTaskPopUpOpen} from '$lib/Templates/editingtask.js';
+  import {isDeleteStatusPopUpOpen} from '$lib/TaskDetails/deletingstatus.js';
+  import {isEditTaskPopUpOpen} from '$lib/TaskDetails/editingtask.js';
 	import DeletingStatusPopup from '../PopUp/DeletingStatusPopup.svelte';
 	import TaskCell from './TableComponent/TaskCell.svelte';
 	import EditTaskPopUp from '../PopUp/EditTaskPopUp.svelte';
@@ -16,14 +16,15 @@
 	import SelectTemplatePopUp from '../PopUp/SelectTemplatePopUp.svelte';
 
   // let Statuswidget=TaskStatusDropDown;
+    
     $tableData = [
       ['SL NO.', 'Task', 'Status 1'], 
-      [1, 'New Task 1', "Pending"],
-      [2, 'New Task 2', "Pending"],
-      [3, 'New Task 3', "Yes"],
-      [4, 'New Task 4', "Pending"],
-      [5, 'New Task 5', "In Progress"],
-      [6, 'New Task 6', "Pending"],
+      [1, 'New Task 1', "Applicable"],
+      [2, 'New Task 2', "Applicable"],
+      [3, 'New Task 3', "Applicable"],
+      [4, 'New Task 4', "Applicable"],
+      [5, 'New Task 5', "Not Applicable"],
+      [6, 'New Task 6', "Applicable"],
 
     ];
     $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
@@ -70,9 +71,6 @@ function addingTask(){
         });
 }
 
-  // console.log($tableData);
-  
-
 
   </script>
 
@@ -82,7 +80,7 @@ function addingTask(){
 {/if}
 
 {#if $isDeleteStatusPopUpOpen}
-<DeletingStatusPopup colidx={deletingcolidx}/>
+  <DeletingStatusPopup colidx={deletingcolidx}/>
 {/if}
 
   
@@ -147,7 +145,7 @@ function addingTask(){
                 <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} />
               </div>
             {:else}
-              <TaskStatusDropDown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} />
+              <Templatesdropdown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} />
             {/if}
                 </div>
     

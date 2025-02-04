@@ -7,6 +7,7 @@
     import LocationDetails from "../../Forms/LocationDetails.svelte";
     import { activeTab, steps } from '$lib/Templates/formdatahandling.js';
 	import TemplatesDetails from "../../Forms/TemplatesDetails.svelte";
+	import TaskDetails from "../../Forms/TaskDetails.svelte";
   
     let tabs = [
       { name: "Tempalte Details" },
@@ -62,7 +63,7 @@
           {#if $activeTab === 0}
             <TemplatesDetails />
           {:else}
-            <LocationDetails />
+            <TaskDetails />
           {/if}
         </div>
       </div>

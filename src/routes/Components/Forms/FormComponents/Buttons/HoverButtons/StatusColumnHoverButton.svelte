@@ -20,9 +20,6 @@ export let colIdx=2;
   
       
   </script>
-  {#if $isDeleteStatusPopUpOpen}
-  <DeletingStatusPopup/>
-  {/if}
   <div class=" inline-block z-51">
                   <div class="flex mb-2">
                       <button 

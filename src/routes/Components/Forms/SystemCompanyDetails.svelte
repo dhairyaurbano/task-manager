@@ -114,31 +114,12 @@ let items = [
   
         <!-- PO Number -->
 
-        <!-- <div class="mb-3">
-            <label for="dropdown" class="block text-sm font-medium text-gray-600 ">
-                PO Number
-                <span class="text-red-500">*</span>
-            </label>
-            <select 
-                id="dropdown" 
-                bind:value={$CompanyDetailsSystemTab.PONumber} 
-                multiple
-                class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-                {#each CompanyPONumberoptions as option}
-                    <option value={option.value}>{option.label}</option>
-                {/each}
-            </select>
-        </div> -->
-
-
         <div class="mb-3">
             <label for="ponumber" class="block text-sm font-medium text-gray-600 mb-1">
                 PO Number
                 <span class="text-red-500">*</span>
             </label>
         <Select {items} multiple required />
-
           </div>
   
         <!-- Description -->

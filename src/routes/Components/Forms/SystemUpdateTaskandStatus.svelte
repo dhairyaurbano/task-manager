@@ -6,12 +6,6 @@
     import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import TaskStatusDropDown from '../UI Components/DropDownMenus/TaskStatusDropDown.svelte';
     import { templatePopUpOpen,selectedTemplate } from "$lib/SystemTab/templatePopUp.js";
-	import SystemTable2 from '../UI Components/Tables/SystemTable2.svelte';
-	import SystemTable3 from '../UI Components/Tables/SystemTable3.svelte';
-	import SystemTable4 from '../UI Components/Tables/SystemTable4.svelte';
-
-
-	// import DeletingTaskPopup from "../UI Components/PopUp/DeletingTaskPopup.svelte";
 
     // $isOpen=false;
     function addingTask(){

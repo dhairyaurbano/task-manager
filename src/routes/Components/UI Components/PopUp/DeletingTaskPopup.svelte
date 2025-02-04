@@ -51,18 +51,10 @@
             <span class="text-2xl font-medium">Delete Task:</span>
           </div>
           <div>
-            <span class="text-xl font-normal">Do you want to delete this Task?</span>
+            <span class="text-xl font-normal">Do you want to delete <strong>{$tableData[$deletingrowidx][1]}</strong> Task?</span>
           </div>
-          <div class="flex my-5  items-center justify-center w-full">
-            <div class="flex-1 flex justify-center items-center">
-              <ButtonComponent 
-                label="Cancel" 
-                textcolor="text-black" 
-                bordercolor="border-black" 
-                rounded="rounded-xl" 
-                onClick={ClosePanel}
-              />
-            </div>
+          <div class="flex my-5  items-center justify-center min-w-64">
+            
             <div class="flex-1 flex justify-center items-center">
               <ButtonComponent 
                 label="Delete" 
@@ -71,6 +63,15 @@
                 bordercolor="border-red-500" 
                 rounded="rounded-xl"
                 onClick={()=>DeleteRow()} 
+              />
+            </div>
+            <div class="flex-1 flex justify-center items-center">
+              <ButtonComponent 
+                label="Cancel" 
+                textcolor="text-black" 
+                bordercolor="border-black" 
+                rounded="rounded-xl" 
+                onClick={ClosePanel}
               />
             </div>
           </div>

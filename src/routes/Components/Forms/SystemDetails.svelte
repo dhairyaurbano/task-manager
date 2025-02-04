@@ -41,7 +41,7 @@
                     class:border-b-2={$activeSystemTab === index}
                     class:border-[#01AFF2]={$activeSystemTab === index}
                     on:click={() => {
-                      $activeSystemTab = index; // Update active tab
+                      $activeSystemTab = index;
                     }}
                   >
                     {tab}
