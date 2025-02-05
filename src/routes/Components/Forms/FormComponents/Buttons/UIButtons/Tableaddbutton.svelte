@@ -40,7 +40,7 @@ export let tableData=[[]];
             tableData = [...tableData, newRow];
 
             // Update assigneeData reactively
-            assigneeData = [...assigneeData, ["Not assigned Ho gaya", ""]];
+            assigneeData = [...assigneeData, ["Not assigned", ""]];
         }
     }; 
 

@@ -116,7 +116,7 @@ function addingTask(){
     
                   {#if header === 'Task'}
                      <div class=" absolute right-0 ">
-                      <Tableaddbutton bind:tableData={$tableData} bind:assignee={$assignee} role="addtask"/>
+                      <Tableaddbutton bind:tableData={$tableData} bind:assigneeData={$assignee} role="addtask"/>
   
                      </div>
                   {/if}
@@ -125,7 +125,7 @@ function addingTask(){
                 {#if index === 0} 
                   <div class="absolute -right-2 z-70 transform -translate-y-1/2 top-1/2">
                     <!-- <Tableaddbutton onClick={addColumn} /> -->
-                    <Tableaddbutton bind:tableData={$tableData} bind:assignee={$assignee} role="addstatus"/>
+                    <Tableaddbutton bind:tableData={$tableData} bind:assigneeData={$assignee} role="addstatus"/>
 
                   </div>
                 {/if}
