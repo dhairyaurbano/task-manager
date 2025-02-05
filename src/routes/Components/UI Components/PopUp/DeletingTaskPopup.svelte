@@ -7,12 +7,15 @@
 
   // export let tableData=[[]];
   // export let assigneeData=[[]];
-  // export let deletingrowidx=1;
+  export let deletingrowidx;
 export let closedeletePopup;
+
+export let deletingrow;
 
   // export let rowidx=1;
   function DeleteRow(){
-    console.log("Sirf print karanae kae lilae print kara raha hu...");
+    console.log("Sirf print karanae kae lilae print kara raha hu... vasae mae "+deletingrowidx + " ko delete karnae jaa raha hu ...");
+    deletingrow();
   }
 
   function ClosePanel() {

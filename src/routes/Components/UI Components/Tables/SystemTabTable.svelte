@@ -32,8 +32,11 @@
     $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
 let isDeletePopUpOpen=false;
 
+let deletingrowidx=$tableData.length-1;
+let deletingcolidx=$tableData[0].length-1;
 
-    function OpenDeletePopUp(){
+    function OpenDeletePopUp(row){
+      deletingrowidx=row;
       isDeletePopUpOpen = true;
       console.log('Delete pop up is open');
       console.log("5 feb 2025 ahmedabad");
@@ -44,8 +47,7 @@ let isDeletePopUpOpen=false;
       console.log('Mitchi Delete pop up is closed');
     }
 
-    let deletingrowidx=$tableData.length-1;
-    let deletingcolidx=$tableData[0].length-1;
+
   
     let columnStyles = ['min-w-16 ', 'w-full', 'w-28']; 
   
@@ -59,6 +61,27 @@ let isDeletePopUpOpen=false;
       }
     }
   
+
+    function deletingrow(){
+        console.log("We are at ultimateum level to delete");
+        console.log("Delete Row " + deletingrowidx);
+
+        tableData.update(data => {
+            console.table(data);
+            const updatedData = [...data]; 
+            updatedData.splice(deletingrowidx, 1);
+            console.table(updatedData);
+            return updatedData; 
+        });
+        assignee.update(data => {
+            console.table(data);
+            const updatedData = [...data]; 
+            updatedData.splice(deletingrowidx-1, 1);
+            console.table(updatedData);
+            return updatedData; 
+        });
+        isDeletePopUpOpen = false;
+    }
 
 function addingTask(){
   const newRow = [
@@ -89,7 +112,7 @@ function addingTask(){
 
 
   {#if isDeletePopUpOpen}
-<DeletingTaskPopup rowidx={deletingrowidx} closedeletePopup={CloseDeletePopUp}/>
+<DeletingTaskPopup rowidx={deletingrowidx} closedeletePopup={CloseDeletePopUp} deletingrow={deletingrow}/>
 {/if}
 
 {#if $isDeleteStatusPopUpOpen}

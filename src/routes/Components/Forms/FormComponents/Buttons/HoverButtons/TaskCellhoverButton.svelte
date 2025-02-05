@@ -19,10 +19,8 @@
     }
 
     function openDeletePopUp(row){
-      console.log(`Row ${row} was clicked ggggggggggggirrrrrr national park`);
-      // $deletingrowidx=row;
-      // $isDeletePopUpOpen=true;
-      onclickListener();
+      console.log(`Row ${row} was clicked`);
+      onclickListener(row);
     }
 </script>
 
