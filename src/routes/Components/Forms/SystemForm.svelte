@@ -10,7 +10,7 @@
         console.log("Back button clicked");
     }
   import {activeTab,activeSystemTab, CompanyDetailsSystemTab,steps, systemSubTabs} from '../../../lib/SystemTab/formdatahandling.js';
-  import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
+  // import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import SystemUpdateTaskandStatus from "./SystemUpdateTaskandStatus.svelte";
 
     function savedetials(){

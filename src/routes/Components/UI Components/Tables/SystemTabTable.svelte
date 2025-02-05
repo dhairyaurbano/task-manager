@@ -1,17 +1,20 @@
 <script>
-    import { tableData,assignee } from '../../../../lib/Templates/addingtemplate.js';
-    import { isDeletePopUpOpen } from '../../../../lib/Templates/deletingtask.js';
+    import { tableData,assignee } from '../../../../lib/TaskDetails/addtaskdatahandling.js';
+    import {isDeleteStatusPopUpOpen} from '$lib/TaskDetails/deletingstatus.js';
+    import {isEditTaskPopUpOpen} from '$lib/TaskDetails/editingtask.js';
+    import { selectedTemplate,templatePopUpOpen } from "$lib/SystemTab/templatePopUp.js";
+
+
+    // import { isDeletePopUpOpen } from '../../../../lib/Templates/deletingtask.js';
     import Tableaddbutton from '../../Forms/FormComponents/Buttons/UIButtons/Tableaddbutton.svelte';
 	import TaskCellhoverButton from '../../Forms/FormComponents/Buttons/HoverButtons/TaskCellhoverButton.svelte';
 	import TaskStatusDropDown from '../DropDownMenus/TaskStatusDropDown.svelte';
 	import DeletingTaskPopup from '../PopUp/DeletingTaskPopup.svelte';
 	import StatusCell from './TableComponent/StatusCell.svelte';
-  import {isDeleteStatusPopUpOpen} from '$lib/Templates/deletingstatus.js';
-  import {isEditTaskPopUpOpen} from '$lib/Templates/editingtask.js';
+
 	import DeletingStatusPopup from '../PopUp/DeletingStatusPopup.svelte';
 	import TaskCell from './TableComponent/TaskCell.svelte';
 	import EditTaskPopUp from '../PopUp/EditTaskPopUp.svelte';
-  import { selectedTemplate,templatePopUpOpen } from "$lib/SystemTab/templatePopUp.js";
 	import Templatecomponent from '../../Template Component/Templatecomponent.svelte';
 	import SelectTemplatePopUp from '../PopUp/SelectTemplatePopUp.svelte';
 
@@ -27,10 +30,18 @@
 
     ];
     $assignee = Array($tableData.length - 1).fill(["Not assigned", ""]);
+let isDeletePopUpOpen=false;
+
 
     function OpenDeletePopUp(){
-      $isDeletePopUpOpen = true;
+      isDeletePopUpOpen = true;
       console.log('Delete pop up is open');
+      console.log("5 feb 2025 ahmedabad");
+    }
+
+    function CloseDeletePopUp(){
+      isDeletePopUpOpen = false;
+      console.log('Mitchi Delete pop up is closed');
     }
 
     let deletingrowidx=$tableData.length-1;
@@ -77,8 +88,8 @@ function addingTask(){
   </script>
 
 
-  {#if $isDeletePopUpOpen}
-<DeletingTaskPopup rowidx={deletingrowidx}/>
+  {#if isDeletePopUpOpen}
+<DeletingTaskPopup rowidx={deletingrowidx} closedeletePopup={CloseDeletePopUp}/>
 {/if}
 
 {#if $isDeleteStatusPopUpOpen}
@@ -146,7 +157,7 @@ function addingTask(){
               </div>
             {:else if index === 1}
               <div>
-                <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} />
+                <TaskCell taskname={cell} assignedTo={$assignee[rowIndex][0]} rowidx={rowIndex + 1} onclickListener={OpenDeletePopUp} />
               </div>
             {:else}
               <TaskStatusDropDown statusValue={cell} on:statusChange={(e) => $tableData[rowIndex + 1][index] = e.detail} />

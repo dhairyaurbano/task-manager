@@ -3,7 +3,6 @@
 	import ButtonComponent from "./FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
     import {isOpen} from '../../../lib/TaskDetails/addtaskdatahandling.js';
 	import SystemTabTable from "../UI Components/Tables/SystemTabTable.svelte";
-    import {isDeletePopUpOpen} from '../../../lib/TaskDetails/deletingtask.js';
 	import TaskStatusDropDown from '../UI Components/DropDownMenus/TaskStatusDropDown.svelte';
     import { templatePopUpOpen,selectedTemplate } from "$lib/SystemTab/templatePopUp.js";
 

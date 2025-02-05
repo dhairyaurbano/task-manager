@@ -1,36 +1,27 @@
 <script>
 
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
-  import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
-  import { tableData,assignee } from "$lib/TaskDetails/addtaskdatahandling.js";
-  import { deletingrowidx } from "$lib/TaskDetails/deletingtask.js";
+  // import {isDeletePopUpOpen} from '$lib/TaskDetails/deletingtask.js';
+
+
+
+  // export let tableData=[[]];
+  // export let assigneeData=[[]];
+  // export let deletingrowidx=1;
+export let closedeletePopup;
 
   // export let rowidx=1;
+  function DeleteRow(){
+    console.log("Sirf print karanae kae lilae print kara raha hu...");
+  }
 
   function ClosePanel() {
-    isDeletePopUpOpen.set(false); 
+    console.log("Sirf print karanae kae lilae print kara raha hu...");
+
+    // isDeletePopUpOpen.set(false); 
+    closedeletePopup();
     }
-  function DeleteRow(){
-    isDeletePopUpOpen.set(true);
 
-        console.log("Delete Row " + $deletingrowidx);
-
-        tableData.update(data => {
-            console.table(data);
-            const updatedData = [...data]; 
-            updatedData.splice($deletingrowidx, 1);
-            console.table(updatedData);
-            return updatedData; 
-        });
-        assignee.update(data => {
-            console.table(data);
-            const updatedData = [...data]; 
-            updatedData.splice($deletingrowidx-1, 1);
-            console.table(updatedData);
-            return updatedData; 
-        });
-        isDeletePopUpOpen.set(false); 
-  }
 
 </script>
 <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -51,7 +42,7 @@
             <span class="text-2xl font-medium">Delete Task:</span>
           </div>
           <div>
-            <span class="text-xl font-normal">Do you want to delete <strong>{$tableData[$deletingrowidx][1]}</strong> Task?</span>
+            <span class="text-xl font-normal">Do you want to delete this Task?</span>
           </div>
           <div class="flex my-5  items-center justify-center min-w-64">
             

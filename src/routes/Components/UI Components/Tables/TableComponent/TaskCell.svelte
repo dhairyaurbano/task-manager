@@ -4,8 +4,10 @@
 
     export let taskname="Custom Task name";
     export let assignedTo="choose assigned to";
+    export let onclickListener;
     let hoverbuttonvisible=false;
     export let rowidx=0;
+
 </script>
 
 
@@ -34,7 +36,7 @@
   
   {#if hoverbuttonvisible}
   <div class="absolute right-1 top-1/2 transform -translate-y-1/2">
-    <TaskCellhoverButton row={rowidx} />
+    <TaskCellhoverButton row={rowidx} onclickListener={onclickListener}/>
   </div>
   {/if}
   </div>

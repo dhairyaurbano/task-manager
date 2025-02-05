@@ -1,5 +1,5 @@
 <script>
-  import {isDeletePopUpOpen,deletingrowidx} from '$lib/TaskDetails/deletingtask.js';
+  // import {isDeletePopUpOpen,deletingrowidx} from '$lib/TaskDetails/deletingtask.js';
   import {editable} from "$lib/TaskDetails/testingeditablefunctionality.js";
   import {isEditTaskPopUpOpen,currentrow} from "$lib/TaskDetails/editingtask.js";
   import { tableData,assignee } from "$lib/TaskDetails/addtaskdatahandling.js";
@@ -8,6 +8,9 @@
 	import DeletingTaskPopup from '../../../../UI Components/PopUp/DeletingTaskPopup.svelte';
 	import EditTaskPopUp from '../../../../UI Components/PopUp/EditTaskPopUp.svelte';
   export let row=0;
+    export let onclickListener;
+    export let closeDeletePopUp;
+    
   isEditTaskPopUpOpen.set(false);
     function openEditPopUp(row){
       console.log(`Row ${row} was clicked in edit Task`);
@@ -16,9 +19,10 @@
     }
 
     function openDeletePopUp(row){
-      console.log(`Row ${row} was clicked`);
-      $deletingrowidx=row;
-      $isDeletePopUpOpen=true;
+      console.log(`Row ${row} was clicked ggggggggggggirrrrrr national park`);
+      // $deletingrowidx=row;
+      // $isDeletePopUpOpen=true;
+      onclickListener();
     }
 </script>
 

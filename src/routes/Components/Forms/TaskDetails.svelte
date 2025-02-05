@@ -5,7 +5,6 @@
   import {activeTab, CompanyDetails,steps} from '../../../lib/CompanyTab/formdatahandling.js'
 	import TemplatesTable from "../UI Components/Tables/TemplatesTable.svelte";
 
-
   function validateDropdown(event) {
     const selectElement = event.target;
 

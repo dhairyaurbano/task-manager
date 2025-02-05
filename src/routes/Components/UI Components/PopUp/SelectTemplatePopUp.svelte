@@ -1,6 +1,6 @@
 <script>
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
-  import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
+//   import {isDeletePopUpOpen} from '../../../../lib/TaskDetails/deletingtask.js';
   import { deletingrowidx } from "$lib/TaskDetails/deletingtask.js";
   import { templates,templatePopUpOpen } from "$lib/SystemTab/templatePopUp.js";
 	import Templatecomponent from "../../Template Component/Templatecomponent.svelte";
