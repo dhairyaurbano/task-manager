@@ -34,9 +34,12 @@ let isDeletePopUpOpen=false;
 
 let deletingrowidx=$tableData.length-1;
 let deletingcolidx=$tableData[0].length-1;
+let deletingTaskName="Undefined";
+
 
     function OpenDeletePopUp(row){
       deletingrowidx=row;
+  deletingTaskName=$tableData[row][1];
       isDeletePopUpOpen = true;
       console.log('Delete pop up is open');
       console.log("5 feb 2025 ahmedabad");
@@ -112,7 +115,7 @@ function addingTask(){
 
 
   {#if isDeletePopUpOpen}
-<DeletingTaskPopup rowidx={deletingrowidx} closedeletePopup={CloseDeletePopUp} deletingrow={deletingrow}/>
+<DeletingTaskPopup rowidx={deletingrowidx} closedeletePopup={CloseDeletePopUp} deletingrow={deletingrow} deletingtaskname={deletingTaskName}/>
 {/if}
 
 {#if $isDeleteStatusPopUpOpen}

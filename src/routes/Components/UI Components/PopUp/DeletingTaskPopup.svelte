@@ -3,18 +3,18 @@
 	import ButtonComponent from "../../Forms/FormComponents/Buttons/UIButtons/ButtonComponent.svelte";
   // import {isDeletePopUpOpen} from '$lib/TaskDetails/deletingtask.js';
 
-
+  export let deletingtaskname;
 
   // export let tableData=[[]];
   // export let assigneeData=[[]];
-  export let deletingrowidx;
+  // export let deletingrowidx;
 export let closedeletePopup;
 
 export let deletingrow;
 
-  // export let rowidx=1;
+  export let rowidx;
   function DeleteRow(){
-    console.log("Sirf print karanae kae lilae print kara raha hu... vasae mae "+deletingrowidx + " ko delete karnae jaa raha hu ...");
+    console.log("Sirf print karanae kae lilae print kara raha hu... vasae mae "+rowidx+ " ko delete karnae jaa raha hu ...");
     deletingrow();
   }
 
@@ -45,7 +45,7 @@ export let deletingrow;
             <span class="text-2xl font-medium">Delete Task:</span>
           </div>
           <div>
-            <span class="text-xl font-normal">Do you want to delete this Task?</span>
+            <span class="text-xl font-normal">Do you want to delete <strong>{deletingtaskname}</strong> Task?</span>
           </div>
           <div class="flex my-5  items-center justify-center min-w-64">
             
